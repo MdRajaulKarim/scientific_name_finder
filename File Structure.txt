@@ -26,6 +26,7 @@ scientific-name-finder/
 │            ├── animal.svg
 │            ├── plant.svg
 │            ├── fungi.svg
-│            └── bacteria.svgGBIF
-│
-└── netlify.toml            ← hosting config
+│            └── bacteria.svg
+└── GBIF
+    │
+    └── netlify.toml            ← hosting config
