@@ -1,0 +1,31 @@
+scientific-name-finder/
+│
+├── index.html
+├── about.html
+├── contact.html
+├── search.html
+├── details.html
+│
+├── assets/
+│   ├── css/
+│   │   ├── main.css        ← global styles, variables, navbar, footer
+│   │   ├── home.css        ← hero, cards, search
+│   │   ├── details.css     ← species detail page
+│   │   ├── about.css       ← about page
+│   │   └── contact.css     ← contact form
+│   │
+│   ├── js/
+│   │   ├── search.js       ← live search logic (GBIF API)
+│   │   ├── home.js         ← featured species on homepage
+│   │   ├── details.js      ← species detail fetcher
+│   │   └── contact.js      ← form handler (Netlify Forms)
+│   │
+│   └── images/
+│       └── logo.svg        ← only logo/icons, species images come from
+│       └──  placeholders/
+│            ├── animal.svg
+│            ├── plant.svg
+│            ├── fungi.svg
+│            └── bacteria.svgGBIF
+│
+└── netlify.toml            ← hosting config
