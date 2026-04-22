@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Track Order | ZestyBite</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .tracking-card {
+            max-width: 500px;
+            margin: 50px auto;
+            background: var(--color-secondary);
+            padding: 30px;
+            border-top: 5px solid var(--color-accent);
+        }
+        .status-container { margin: 30px 0; position: relative; }
+        .status-step { display: flex; align-items: center; margin-bottom: 20px; color: #999; }
+        .status-step.active { color: var(--text-main); font-weight: bold; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; background: #ddd; margin-right: 15px; }
+        .active .dot { background: var(--color-accent); box-shadow: 0 0 8px var(--color-accent); }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo"><h1>ZestyBite</h1></div>
+    <a href="index.html" style="text-decoration:none; color:var(--text-main);">Back to Home</a>
+</nav>
+
+<div class="tracking-card">
+    <h2>Order #9921 Status</h2>
+    <p style="font-size: 0.9rem; color: #666;">Estimated Arrival: 25-30 Mins</p>
+
+    <div class="status-container">
+        <div class="status-step active">
+            <div class="dot"></div> Order Confirmed
+        </div>
+        <div class="status-step active">
+            <div class="dot"></div> Preparing your Food
+        </div>
+        <div class="status-step">
+            <div class="dot"></div> Out for Delivery
+        </div>
+        <div class="status-step">
+            <div class="dot"></div> Delivered
+        </div>
+    </div>
+
+    <hr>
+    <div style="margin-top:20px;">
+        <h4>Delivery To:</h4>
+        <p id="userAddress">Apt 4B, Emerald Heights, City Center</p>
+        <p id="userPhone">Ph: +91 90000 00000</p>
+    </div>
+</div>
+
+</body>
+</html>

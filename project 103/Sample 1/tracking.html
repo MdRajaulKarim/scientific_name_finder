@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Tracking - Savory Haven</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h1>🍽️ Savory Haven</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="booking.html">Book Table</a></li>
+                <li><a href="tracking.html" class="active">My Orders</a></li>
+                <li><a href="admin.html" id="adminLink" style="display:none;">Admin</a></li>
+                <li><button id="authBtn" class="btn-primary">Login</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Tracking Header -->
+    <section class="tracking-header">
+        <div class="container">
+            <h1>Order Tracking</h1>
+            <p>Track your food delivery in real-time</p>
+        </div>
+    </section>
+
+    <!-- Tracking Section -->
+    <section class="tracking-section">
+        <div class="container">
+            <div id="activeOrders" class="active-orders">
+                <!-- Active orders will be displayed here -->
+            </div>
+
+            <div id="pastOrders" class="past-orders">
+                <h2>Order History</h2>
+                <!-- Past orders will be displayed here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <p>Savory Haven is your premium destination for authentic culinary experiences.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>📞 Phone: +91 9876543210</p>
+                    <p>📧 Email: info@savoryhahen.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Savory Haven. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script src="payment.js"></script>
+</body>
+</html>

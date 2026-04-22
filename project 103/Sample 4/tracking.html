@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Order — ZestyBite</title>
+  <meta name="description" content="Track your ZestyBite order in real-time. Know when your food is being prepared and delivered.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <span class="logo-icon">🍛</span>
+      <span class="logo-text">Zesty<span>Bite</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="booking.html">Reserve</a></li>
+      <li><a href="tracking.html" class="active">Track Order</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="cart-btn" onclick="openCart()">
+        <span class="cart-icon">🛒</span>
+        Cart&nbsp;<span class="cart-count">0</span>
+      </button>
+      <a href="login.html" class="btn-login-nav" id="navLoginBtn">Login</a>
+      <button style="display:none;" id="navUserBtn"></button>
+      <button class="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav">
+  <a href="index.html">🏠 Home</a>
+  <a href="menu.html">🍽️ Menu</a>
+  <a href="booking.html">📅 Reserve</a>
+  <a href="tracking.html">📦 Track</a>
+  <a href="login.html">👤 Login</a>
+</div>
+
+<!-- TRACKING HERO -->
+<div class="tracking-hero">
+  <div class="container">
+    <h1 style="color:#fff;">Track Your Order</h1>
+    <p style="color:rgba(255,255,255,0.8);">Enter your order ID to see real-time updates on your delivery.</p>
+  </div>
+</div>
+
+<!-- TRACKING WRAPPER -->
+<div class="tracking-wrapper">
+  <!-- Lookup Form -->
+  <div class="tracking-lookup fade-up">
+    <form onsubmit="trackOrder(event)">
+      <div style="display:flex;gap:var(--space-md);">
+        <input type="text" class="form-control" id="orderID" placeholder="Enter Order ID (e.g. ZB001234)" style="flex:1;" required>
+        <button type="submit" class="btn btn-primary">Track</button>
+      </div>
+      <p style="font-size:0.8rem;color:var(--color-text-muted);margin-top:var(--space-sm);">Order ID found in your confirmation email or SMS</p>
+    </form>
+  </div>
+
+  <!-- Tracking Card -->
+  <div class="tracking-card fade-up" id="trackingCard">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-lg);padding-bottom:var(--space-lg);border-bottom:1px solid var(--color-border);">
+      <div>
+        <h3 style="margin-bottom:4px;">Order #ZB001234</h3>
+        <p style="font-size:0.85rem;color:var(--color-text-muted);">Placed on Dec 15, 2024 at 6:45 PM</p>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:1.5rem;font-weight:700;color:var(--color-accent);">₹582</div>
+        <span class="status-badge confirmed">Confirmed</span>
+      </div>
+    </div>
+
+    <!-- Order Items -->
+    <div style="margin-bottom:var(--space-lg);">
+      <h5 style="margin-bottom:var(--space-md);color:var(--color-text-muted);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;">Items Ordered</h5>
+      <div style="display:flex;flex-direction:column;gap:var(--space-sm);">
+        <div style="display:flex;justify-content:space-between;padding:var(--space-sm) 0;border-bottom:1px solid var(--color-border);">
+          <span>Butter Chicken (2x) — 300g</span>
+          <span style="font-weight:600;">₹460</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:var(--space-sm) 0;border-bottom:1px solid var(--color-border);">
+          <span>Naan (1x)</span>
+          <span style="font-weight:600;">₹80</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:var(--space-sm) 0;">
+          <span>Delivery Charge</span>
+          <span style="font-weight:600;">₹42</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stepper -->
+    <div style="margin:var(--space-xl) 0;padding-bottom:var(--space-lg);border-bottom:1px solid var(--color-border);">
+      <h5 style="margin-bottom:var(--space-md);color:var(--color-text-muted);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;">Order Status</h5>
+      <div class="order-stepper">
+        <div class="step-item">
+          <div class="step-connector">
+            <div class="step-dot completed">✓</div>
+            <div class="step-line completed"></div>
+          </div>
+          <div class="step-content">
+            <div class="step-title">Order Confirmed</div>
+            <div class="step-time">6:45 PM</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-connector">
+            <div class="step-dot completed">✓</div>
+            <div class="step-line completed"></div>
+          </div>
+          <div class="step-content">
+            <div class="step-title">Preparing Your Food</div>
+            <div class="step-time">6:52 PM</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-connector">
+            <div class="step-dot active">📦</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <div class="step-title">Out for Delivery</div>
+            <div class="step-time">7:08 PM</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-connector">
+            <div class="step-dot">🏠</div>
+          </div>
+          <div class="step-content">
+            <div class="step-title">Delivered</div>
+            <div class="step-time">Expected at 7:35 PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ETA Progress -->
+    <div class="eta-bar">
+      <div class="eta-label">
+        <span>Estimated Delivery Time</span>
+        <span style="color:var(--color-accent);font-weight:700;">27 mins</span>
+      </div>
+      <div class="eta-progress">
+        <div class="eta-fill" style="width:65%;"></div>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div style="margin-top:var(--space-lg);padding:var(--space-lg);background:var(--color-base);border-radius:var(--radius-md);display:flex;align-items:center;gap:var(--space-md);">
+      <div style="font-size:1.5rem;">👨‍💼</div>
+      <div style="flex:1;">
+        <div style="font-weight:600;font-size:0.9rem;">Delivery Partner: Rahul Singh</div>
+        <div style="font-size:0.8rem;color:var(--color-text-muted);">⭐ 4.8 ratings • 1,240 deliveries</div>
+      </div>
+      <button class="btn btn-sm btn-ghost" onclick="showToast('📞 Calling delivery partner...', 'info')">Call</button>
+    </div>
+
+    <button class="btn btn-primary btn-full" style="margin-top:var(--space-lg);" onclick="showToast('✅ Thanks for your order! See you again soon!', 'success'); setTimeout(() => window.location.href='index.html', 2000);">Done</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo-text">Zesty<span>Bite</span></span>
+        <p>Bringing authentic Indian flavours to your table since 2009.</p>
+        <div class="social-links" style="margin-top:var(--space-lg);">
+          <a href="#" class="social-link">f</a>
+          <a href="#" class="social-link">in</a>
+          <a href="#" class="social-link">yt</a>
+          <a href="#" class="social-link">ig</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="booking.html">Book a Table</a></li>
+          <li><a href="tracking.html">Track Order</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="#">📍 42, Foodie Lane, MG Road</a></li>
+          <li><a href="tel:+919876543210">📞 +91 98765 43210</a></li>
+          <li><a href="mailto:hello@zestybite.com">✉️ hello@zestybite.com</a></li>
+          <li><a href="#">🕐 Mon–Sun: 11 AM – 11 PM</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="admin.html" style="font-size:0.8rem;color:rgba(255,255,255,0.2);">Admin</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p style="margin:0;color:rgba(255,255,255,0.4);">© 2025 ZestyBite. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Toast container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="js/main.js"></script>
+<script>
+  function trackOrder(e) {
+    e.preventDefault();
+    const orderID = document.getElementById('orderID').value;
+    if (orderID) {
+      document.getElementById('trackingCard').classList.add('visible');
+      showToast(`✅ Tracking order ${orderID}...`, 'success');
+    }
+  }
+</script>
+</body>
+</html>

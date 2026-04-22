@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reserve Table — ZestyBite</title>
+  <meta name="description" content="Book a table at ZestyBite. Reserve your spot for authentic Indian dining experience.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <span class="logo-icon">🍛</span>
+      <span class="logo-text">Zesty<span>Bite</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="booking.html" class="active">Reserve</a></li>
+      <li><a href="tracking.html">Track Order</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="cart-btn" onclick="openCart()">
+        <span class="cart-icon">🛒</span>
+        Cart&nbsp;<span class="cart-count">0</span>
+      </button>
+      <a href="login.html" class="btn-login-nav" id="navLoginBtn">Login</a>
+      <button style="display:none;" id="navUserBtn"></button>
+      <button class="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav">
+  <a href="index.html">🏠 Home</a>
+  <a href="menu.html">🍽️ Menu</a>
+  <a href="booking.html">📅 Reserve</a>
+  <a href="tracking.html">📦 Track</a>
+  <a href="login.html">👤 Login</a>
+</div>
+
+<!-- BOOKING HERO -->
+<div class="booking-hero">
+  <div class="container">
+    <span class="section-tag" style="color:rgba(255,255,255,0.7);">Plan Your Visit</span>
+    <h1>Reserve Your Table</h1>
+    <p>Experience authentic Indian cuisine in a warm, welcoming atmosphere. Book your table today.</p>
+  </div>
+</div>
+
+<!-- BOOKING CONTENT -->
+<div class="booking-wrapper">
+  <!-- Info Card -->
+  <div class="booking-info-card fade-up">
+    <div class="info-row">
+      <div class="info-icon">🕐</div>
+      <div>
+        <div class="info-label">OPENING HOURS</div>
+        <div class="info-value">Mon–Sun: 11 AM – 11 PM</div>
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="info-icon">📍</div>
+      <div>
+        <div class="info-label">LOCATION</div>
+        <div class="info-value">42, Foodie Lane, MG Road, Bengaluru</div>
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="info-icon">📞</div>
+      <div>
+        <div class="info-label">CONTACT</div>
+        <div class="info-value"><a href="tel:+919876543210">+91 98765 43210</a></div>
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="info-icon">👥</div>
+      <div>
+        <div class="info-label">CAPACITY</div>
+        <div class="info-value">2–50 guests</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Booking Form -->
+  <div class="booking-form-card fade-up">
+    <h2 style="margin-bottom:var(--space-lg);">Book Your Table</h2>
+
+    <form id="bookingForm" onsubmit="submitBooking(event)">
+      <!-- Guest Count -->
+      <div class="form-group">
+        <label class="form-label">Number of Guests *</label>
+        <div class="guest-selector">
+          <button class="guest-btn" type="button" onclick="updateGuests(-1)">−</button>
+          <span class="guest-count" id="guestCount">2</span>
+          <button class="guest-btn" type="button" onclick="updateGuests(1)">+</button>
+        </div>
+      </div>
+
+      <!-- Date -->
+      <div class="form-group">
+        <label class="form-label">Date *</label>
+        <input type="date" class="form-control" id="bookingDate" required>
+      </div>
+
+      <!-- Time -->
+      <div class="form-group">
+        <label class="form-label">Time *</label>
+        <div class="time-slots">
+          <div class="time-slot" onclick="selectTime(this)">11:00</div>
+          <div class="time-slot" onclick="selectTime(this)">12:00</div>
+          <div class="time-slot" onclick="selectTime(this)">13:00</div>
+          <div class="time-slot" onclick="selectTime(this)">14:00</div>
+          <div class="time-slot" onclick="selectTime(this)">18:00</div>
+          <div class="time-slot" onclick="selectTime(this)">19:00</div>
+          <div class="time-slot" onclick="selectTime(this)">20:00</div>
+          <div class="time-slot" onclick="selectTime(this)">21:00</div>
+        </div>
+      </div>
+
+      <!-- Name -->
+      <div class="form-group">
+        <label class="form-label">Full Name *</label>
+        <input type="text" class="form-control" id="bookingName" placeholder="Your name" required>
+      </div>
+
+      <!-- Phone -->
+      <div class="form-group">
+        <label class="form-label">Phone Number *</label>
+        <div class="phone-input-group">
+          <span class="phone-prefix">🇮🇳 +91</span>
+          <input type="tel" id="bookingPhone" placeholder="98765 43210" maxlength="10" required>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label class="form-label">Email (Optional)</label>
+        <input type="email" class="form-control" id="bookingEmail" placeholder="your.email@example.com">
+      </div>
+
+      <!-- Special Requests -->
+      <div class="form-group">
+        <label class="form-label">Special Requests</label>
+        <textarea class="form-control" id="bookingNotes" rows="3" placeholder="High chair, celebration, dietary preferences, etc."></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-lg btn-full" style="margin-top:var(--space-lg);">Confirm Booking 🎉</button>
+    </form>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo-text">Zesty<span>Bite</span></span>
+        <p>Bringing authentic Indian flavours to your table since 2009.</p>
+        <div class="social-links" style="margin-top:var(--space-lg);">
+          <a href="#" class="social-link">f</a>
+          <a href="#" class="social-link">in</a>
+          <a href="#" class="social-link">yt</a>
+          <a href="#" class="social-link">ig</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="booking.html">Book a Table</a></li>
+          <li><a href="tracking.html">Track Order</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="#">📍 42, Foodie Lane, MG Road</a></li>
+          <li><a href="tel:+919876543210">📞 +91 98765 43210</a></li>
+          <li><a href="mailto:hello@zestybite.com">✉️ hello@zestybite.com</a></li>
+          <li><a href="#">🕐 Mon–Sun: 11 AM – 11 PM</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="admin.html" style="font-size:0.8rem;color:rgba(255,255,255,0.2);">Admin</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p style="margin:0;color:rgba(255,255,255,0.4);">© 2025 ZestyBite. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Toast container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="js/main.js"></script>
+<script>
+  let guestCount = 2;
+  let selectedTime = null;
+
+  function updateGuests(delta) {
+    guestCount = Math.max(1, Math.min(50, guestCount + delta));
+    document.getElementById('guestCount').textContent = guestCount;
+  }
+
+  function selectTime(element) {
+    document.querySelectorAll('.time-slot').forEach(e => e.classList.remove('selected'));
+    element.classList.add('selected');
+    selectedTime = element.textContent;
+  }
+
+  function submitBooking(e) {
+    e.preventDefault();
+    if (!selectedTime) {
+      showToast('Please select a time slot', 'error');
+      return;
+    }
+    showToast('✅ Booking confirmed! You will receive a confirmation call soon.', 'success');
+    setTimeout(() => window.location.href = 'index.html', 2000);
+  }
+
+  // Set min date to today
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('bookingDate').setAttribute('min', today);
+</script>
+</body>
+</html>

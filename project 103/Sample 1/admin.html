@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Savory Haven</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h1>🍽️ Savory Haven Admin</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Back to Home</a></li>
+                <li><button id="logoutBtn" class="btn-primary">Logout</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Admin Dashboard -->
+    <section class="admin-dashboard">
+        <div class="container">
+            <!-- Sidebar Navigation -->
+            <aside class="admin-sidebar">
+                <ul class="admin-menu">
+                    <li><a href="#dashboard" class="admin-nav-link active" onclick="showAdminTab(event, 'dashboard')">📊 Dashboard</a></li>
+                    <li><a href="#menu" class="admin-nav-link" onclick="showAdminTab(event, 'menu')">🍴 Menu Management</a></li>
+                    <li><a href="#orders" class="admin-nav-link" onclick="showAdminTab(event, 'orders')">📦 Orders</a></li>
+                    <li><a href="#bookings" class="admin-nav-link" onclick="showAdminTab(event, 'bookings')">📅 Bookings</a></li>
+                    <li><a href="#offers" class="admin-nav-link" onclick="showAdminTab(event, 'offers')">🎉 Offers</a></li>
+                    <li><a href="#locations" class="admin-nav-link" onclick="showAdminTab(event, 'locations')">📍 Locations</a></li>
+                    <li><a href="#analytics" class="admin-nav-link" onclick="showAdminTab(event, 'analytics')">📈 Analytics</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="admin-content">
+                <!-- Dashboard Tab -->
+                <div id="dashboard" class="admin-tab active">
+                    <h2>Dashboard Overview</h2>
+                    <div class="dashboard-cards">
+                        <div class="card">
+                            <h3>Today's Sales</h3>
+                            <p class="stat">₹<span id="daySales">0</span></p>
+                        </div>
+                        <div class="card">
+                            <h3>Active Orders</h3>
+                            <p class="stat"><span id="activeOrdersCount">0</span></p>
+                        </div>
+                        <div class="card">
+                            <h3>Total Bookings</h3>
+                            <p class="stat"><span id="totalBookings">0</span></p>
+                        </div>
+                        <div class="card">
+                            <h3>Menu Items</h3>
+                            <p class="stat"><span id="menuItemsCount">0</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Management Tab -->
+                <div id="menu" class="admin-tab">
+                    <h2>Menu Management</h2>
+                    <button class="btn-primary" onclick="showAddItemForm()">+ Add New Item</button>
+
+                    <form id="addItemForm" style="display:none;" onsubmit="handleAddItem(event)">
+                        <div class="form-group">
+                            <label>Item Name</label>
+                            <input type="text" id="itemName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="itemDesc"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Price (₹)</label>
+                                <input type="number" id="itemPrice" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select id="itemCategory" required>
+                                    <option value="appetizer">Appetizer</option>
+                                    <option value="main">Main Course</option>
+                                    <option value="dessert">Dessert</option>
+                                    <option value="beverage">Beverage</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Type</label>
+                                <select id="itemType" required>
+                                    <option value="veg">Vegetarian 🟢</option>
+                                    <option value="non-veg">Non-Vegetarian 🔴</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Availability</label>
+                                <select id="itemAvailable" required>
+                                    <option value="true">Available</option>
+                                    <option value="false">Not Available</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">Add Item</button>
+                        <button type="button" class="btn-secondary" onclick="hideAddItemForm()">Cancel</button>
+                    </form>
+
+                    <div id="menuItems" class="menu-items-list">
+                        <!-- Menu items will be displayed here -->
+                    </div>
+                </div>
+
+                <!-- Orders Tab -->
+                <div id="orders" class="admin-tab">
+                    <h2>Order Management</h2>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" onclick="filterOrders('all')">All</button>
+                        <button class="filter-btn" onclick="filterOrders('pending')">Pending</button>
+                        <button class="filter-btn" onclick="filterOrders('preparing')">Preparing</button>
+                        <button class="filter-btn" onclick="filterOrders('ready')">Ready</button>
+                        <button class="filter-btn" onclick="filterOrders('delivered')">Delivered</button>
+                    </div>
+                    <div id="ordersList" class="orders-list">
+                        <!-- Orders will be displayed here -->
+                    </div>
+                </div>
+
+                <!-- Bookings Tab -->
+                <div id="bookings" class="admin-tab">
+                    <h2>Table Bookings</h2>
+                    <div id="bookingsList" class="bookings-admin-list">
+                        <!-- Bookings will be displayed here -->
+                    </div>
+                </div>
+
+                <!-- Offers Tab -->
+                <div id="offers" class="admin-tab">
+                    <h2>Manage Offers</h2>
+                    <button class="btn-primary" onclick="showAddOfferForm()">+ Create Offer</button>
+
+                    <form id="addOfferForm" style="display:none;" onsubmit="handleAddOffer(event)">
+                        <div class="form-group">
+                            <label>Offer Title</label>
+                            <input type="text" id="offerTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Offer Description</label>
+                            <textarea id="offerDesc"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Discount %</label>
+                                <input type="number" id="offerDiscount" min="0" max="100" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Valid Until</label>
+                                <input type="date" id="offerExpiry" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">Create Offer</button>
+                        <button type="button" class="btn-secondary" onclick="hideAddOfferForm()">Cancel</button>
+                    </form>
+
+                    <div id="offersList" class="offers-list">
+                        <!-- Offers will be displayed here -->
+                    </div>
+                </div>
+
+                <!-- Locations Tab -->
+                <div id="locations" class="admin-tab">
+                    <h2>Delivery Locations</h2>
+                    <button class="btn-primary" onclick="showAddLocationForm()">+ Add Location</button>
+
+                    <form id="addLocationForm" style="display:none;" onsubmit="handleAddLocation(event)">
+                        <div class="form-group">
+                            <label>Location Area</label>
+                            <input type="text" id="locationArea" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Postal Code</label>
+                            <input type="text" id="locationZip" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Delivery Charge (₹)</label>
+                            <input type="number" id="deliveryCharge" step="0.01" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Add Location</button>
+                        <button type="button" class="btn-secondary" onclick="hideAddLocationForm()">Cancel</button>
+                    </form>
+
+                    <div id="locationsList" class="locations-list">
+                        <!-- Locations will be displayed here -->
+                    </div>
+                </div>
+
+                <!-- Analytics Tab -->
+                <div id="analytics" class="admin-tab">
+                    <h2>Analytics & Reports</h2>
+                    <div class="analytics-filters">
+                        <select id="analyticsFilter">
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                        </select>
+                    </div>
+                    <div id="analyticsChart" class="analytics-chart">
+                        <!-- Chart will be rendered here -->
+                    </div>
+                    <div id="analyticsTable" class="analytics-table">
+                        <!-- Detailed stats will be shown here -->
+                    </div>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Savory Haven Admin Panel. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="admin.js"></script>
+    <script src="printing.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book a Table | ZestyBite</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .booking-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: var(--color-secondary);
+            padding: 40px;
+        }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo"><h1>ZestyBite</h1></div>
+    <a href="index.html" style="text-decoration:none; color:var(--text-main);">Back to Home</a>
+</nav>
+
+<div class="booking-container">
+    <h2>Reserve Your Table</h2>
+    <p style="color: #666; margin-bottom: 20px;">A minimal booking fee of ₹99 applies (Adjustable in final bill).</p>
+    
+    <div class="form-group">
+        <label>Date</label>
+        <input type="date" style="width: 100%;">
+    </div>
+    
+    <div class="form-group">
+        <label>Number of Guests</label>
+        <select style="width: 100%;">
+            <option>2 People</option>
+            <option>4 People</option>
+            <option>6+ People (Group)</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Special Requests</label>
+        <textarea style="width: 100%; height: 100px; padding: 10px;"></textarea>
+    </div>
+
+    <button class="add-btn" onclick="payBookingFee()">PAY ₹99 & RESERVE</button>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="js/payment.js"></script>
+</body>
+</html>

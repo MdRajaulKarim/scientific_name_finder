@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | ZestyBite</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Specific layout for the login center-point */
+        .login-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            padding: 20px;
+        }
+
+        .login-card {
+            background: var(--color-secondary);
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-top: 4px solid var(--color-accent);
+            text-align: center;
+        }
+
+        .login-card h2 {
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .login-card p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--text-main);
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .login-input:focus {
+            border-color: var(--color-accent);
+        }
+
+        .resend-link {
+            display: block;
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: var(--color-accent);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Nav specific to Login */
+        .login-nav {
+            background: var(--color-secondary);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="login-nav">
+        <div class="logo"><h1>ZestyBite</h1></div>
+        <a href="index.html" style="text-decoration: none; color: var(--text-main); font-weight: 600;">✕ Close</a>
+    </nav>
+
+    <main class="login-wrapper">
+        <div class="login-card">
+            
+            <div id="step1">
+                <h2>Welcome Back</h2>
+                <p>Enter your phone number to receive a one-time password (OTP).</p>
+
+                <div class="input-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="phone" class="login-input" placeholder="e.g. 9876543210" maxlength="10">
+                </div>
+
+                <button class="add-btn" onclick="sendOTP()">Send OTP</button>
+            </div>
+
+            <div id="step2" style="display: none;">
+                <h2>Verify OTP</h2>
+                <p>A 6-digit code has been sent to <br><strong id="displayPhone"></strong></p>
+
+                <div class="input-group">
+                    <label>Enter Code</label>
+                    <input type="text" id="otp" class="login-input" placeholder="0 0 0 0 0 0" maxlength="6" style="text-align: center; letter-spacing: 5px;">
+                </div>
+
+                <button class="add-btn" onclick="verifyOTP()">Login to ZestyBite</button>
+                <span class="resend-link" onclick="location.reload()">Change phone number</span>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

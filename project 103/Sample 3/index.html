@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ZestyBite | Premium Dining</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav>
+    <div class="logo"><h1 class="heading-font">ZestyBite</h1></div>
+    <div class="nav-links">
+        <a href="menu.html" style="text-decoration:none; color:inherit; margin-right:20px;">Menu</a>
+        <span onclick="toggleCart()" style="cursor:pointer;">Cart: <span id="cartCount">0</span></span>
+    </div>
+</nav>
+
+<header class="hero-bg">
+    <h1 class="heading-font" style="font-size: 3.5rem; margin-bottom: 10px;">Taste the Extraordinary</h1>
+    <p style="font-size: 1.2rem; font-weight: 300;">Handcrafted meals delivered to your doorstep.</p>
+    <a href="menu.html" class="add-btn" style="width:auto; margin-top:30px; padding: 15px 40px; text-decoration:none;">Explore Menu</a>
+</header>
+
+<main class="menu-grid" style="padding: 60px 5%; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px;">
+    
+    <div class="dish-card" data-type="veg">
+        <div class="symbol-box">
+            <div class="square-border veg-style"><div class="veg-dot"></div></div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=300" alt="Pizza">
+        <div style="padding:20px;">
+            <h3 class="heading-font">Royal Margherita</h3>
+            <div class="stars">★★★★★</div>
+            <p style="margin-bottom:15px; font-weight:600;">₹299</p>
+            <button class="add-btn" onclick="addToCart('Royal Margherita', 299)">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="dish-card" data-type="nonveg">
+        <div class="symbol-box">
+            <div class="square-border nonveg-style"><div class="nonveg-tri"></div></div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300" alt="Burger">
+        <div style="padding:20px;">
+            <h3 class="heading-font">Smoky Truffle Burger</h3>
+            <div class="stars">★★★★☆</div>
+            <p style="margin-bottom:15px; font-weight:600;">₹349</p>
+            <button class="add-btn" onclick="addToCart('Smoky Truffle Burger', 349)">Add to Cart</button>
+        </div>
+    </div>
+
+</main>
+
+<div id="sideCart" class="cart-slide">
+    <div style="padding: 30px;">
+        <h2 class="heading-font">Your Order</h2>
+        <hr style="margin:20px 0; opacity: 0.1;">
+        <div id="cartItemsList">Your cart is empty.</div>
+        <button class="add-btn" style="position:absolute; bottom:30px; width:calc(100% - 60px);">Checkout</button>
+        <button onclick="toggleCart()" style="margin-top:15px; background:none; border:none; cursor:pointer; color:red;">Close</button>
+    </div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

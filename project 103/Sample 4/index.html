@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZestyBite — Authentic Indian Restaurant</title>
+  <meta name="description" content="ZestyBite — Premium Indian cuisine with online ordering, table booking, and fast delivery. Experience the art of Indian cooking.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     NAVIGATION
+     ══════════════════════════════════════════════════════════ -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <span class="logo-icon">🍛</span>
+      <span class="logo-text">Zesty<span>Bite</span></span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="booking.html">Reserve</a></li>
+      <li><a href="tracking.html">Track Order</a></li>
+      <li><a href="admin.html">Admin</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="cart-btn" id="cartBtn" onclick="openCart()">
+        <span class="cart-icon">🛒</span>
+        Cart&nbsp;<span class="cart-count" id="cartCountNav">0</span>
+      </button>
+      <a href="login.html" class="btn-login-nav" id="navLoginBtn">Login</a>
+      <button style="display:none;align-items:center;gap:6px;font-size:0.85rem;font-weight:600;padding:8px 16px;border-radius:6px;background:var(--color-base-dark);" id="navUserBtn"></button>
+      <button class="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile nav -->
+<div class="mobile-nav">
+  <a href="index.html">🏠 Home</a>
+  <a href="menu.html">🍽️ Menu</a>
+  <a href="booking.html">📅 Reserve Table</a>
+  <a href="tracking.html">📦 Track Order</a>
+  <a href="login.html">👤 Login</a>
+  <a href="admin.html">👤 Admin</a>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     HERO SLIDER
+     ══════════════════════════════════════════════════════════ -->
+<section class="hero-slider" id="heroSlider">
+  <!-- Slides injected by main.js -->
+</section>
+
+<!-- Slider controls -->
+<div class="slider-dots" id="sliderDots"></div>
+<div class="slider-arrows">
+  <button class="slider-arrow" onclick="prevSlide()">&#8592;</button>
+  <button class="slider-arrow" onclick="nextSlide()">&#8594;</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     FEATURES STRIP
+     ══════════════════════════════════════════════════════════ -->
+<section class="features-strip">
+  <div class="container">
+    <div class="features-grid">
+      <div class="feature-item fade-up">
+        <span class="feature-icon">🛵</span>
+        <div class="feature-text">
+          <h5>Fast Delivery</h5>
+          <p>30–45 min doorstep delivery</p>
+        </div>
+      </div>
+      <div class="feature-item fade-up">
+        <span class="feature-icon">👨‍🍳</span>
+        <div class="feature-text">
+          <h5>Master Chefs</h5>
+          <p>15+ years of culinary experience</p>
+        </div>
+      </div>
+      <div class="feature-item fade-up">
+        <span class="feature-icon">🌿</span>
+        <div class="feature-text">
+          <h5>Fresh Ingredients</h5>
+          <p>Farm-to-table, sourced daily</p>
+        </div>
+      </div>
+      <div class="feature-item fade-up">
+        <span class="feature-icon">📅</span>
+        <div class="feature-text">
+          <h5>Easy Booking</h5>
+          <p>Reserve tables in 60 seconds</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     FEATURED DISHES
+     ══════════════════════════════════════════════════════════ -->
+<section class="section" style="background: var(--color-base);">
+  <div class="container">
+    <div class="section-header fade-up">
+      <span class="section-tag">From Our Kitchen</span>
+      <h2>Fan Favourites</h2>
+      <div class="divider-accent"></div>
+      <p>Dishes that keep our guests coming back — crafted with love and authentic spices.</p>
+    </div>
+
+    <div class="menu-grid" id="featuredGrid">
+      <!-- Rendered by main.js renderFeaturedItems() -->
+    </div>
+
+    <div style="text-align:center;margin-top:var(--space-2xl);">
+      <a href="menu.html" class="btn btn-primary btn-lg">View Full Menu →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     ABOUT / OUR STORY
+     ══════════════════════════════════════════════════════════ -->
+<section class="section" style="background: var(--color-white);">
+  <div class="container">
+    <div class="about-grid">
+      <!-- Image -->
+      <div class="about-image fade-up">
+        <div class="about-image-fallback">🍛</div>
+        <div class="about-badge">
+          <span class="number">15+</span>
+          <span class="label">Years of Excellence</span>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="fade-up" style="padding-left: var(--space-lg);">
+        <span class="section-tag">Our Story</span>
+        <h2 style="margin-bottom: var(--space-md);">Born from a <em style="font-style:italic;color:var(--color-accent);">Grandmother's Recipe</em></h2>
+        <div class="divider-accent" style="margin:0 0 var(--space-lg);"></div>
+        <p>ZestyBite started in 2009 as a small kitchen in Bengaluru, driven by a passion for preserving the soul of Indian cooking. Our founder, Chef Priya Mehta, built this restaurant around her grandmother's handwritten recipe book — a treasure of regional flavours passed down through generations.</p>
+        <p>Today, every dish we serve carries that same spirit: slow-cooked, thoughtfully spiced, and served with warmth.</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-lg);margin:var(--space-xl) 0;">
+          <div>
+            <div style="font-family:var(--font-heading);font-size:2rem;font-weight:900;color:var(--color-accent);">50+</div>
+            <div style="font-size:0.85rem;color:var(--color-text-muted);">Menu Items</div>
+          </div>
+          <div>
+            <div style="font-family:var(--font-heading);font-size:2rem;font-weight:900;color:var(--color-accent);">200K+</div>
+            <div style="font-size:0.85rem;color:var(--color-text-muted);">Happy Customers</div>
+          </div>
+          <div>
+            <div style="font-family:var(--font-heading);font-size:2rem;font-weight:900;color:var(--color-accent);">4.8★</div>
+            <div style="font-size:0.85rem;color:var(--color-text-muted);">Average Rating</div>
+          </div>
+          <div>
+            <div style="font-family:var(--font-heading);font-size:2rem;font-weight:900;color:var(--color-accent);">3</div>
+            <div style="font-size:0.85rem;color:var(--color-text-muted);">City Locations</div>
+          </div>
+        </div>
+
+        <a href="booking.html" class="btn btn-primary">Reserve Your Table</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     OFFER BANNER
+     ══════════════════════════════════════════════════════════ -->
+<section style="background:var(--color-accent);padding:var(--space-xl) 0;">
+  <div class="container" style="text-align:center;color:#fff;">
+    <p style="font-size:0.85rem;opacity:0.9;margin-bottom:var(--space-sm);letter-spacing:2px;text-transform:uppercase;">Limited Time</p>
+    <h2 style="color:#fff;margin-bottom:var(--space-md);">Weekend Special: 20% Off All Mains</h2>
+    <p style="color:rgba(255,255,255,0.9);max-width:500px;margin:0 auto var(--space-xl);">Valid every Saturday and Sunday. Use code <strong>WEEKEND20</strong> at checkout. Minimum order ₹400.</p>
+    <a href="menu.html" class="btn btn-white btn-lg">Order Now</a>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     TESTIMONIALS
+     ══════════════════════════════════════════════════════════ -->
+<section class="section" style="background: var(--color-base);">
+  <div class="container">
+    <div class="section-header fade-up">
+      <span class="section-tag">What People Say</span>
+      <h2>Guest Reviews</h2>
+      <div class="divider-accent"></div>
+    </div>
+
+    <div class="grid-3">
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"The Butter Chicken is hands-down the best I've had. Smooth, rich, and perfectly balanced. My whole family orders from ZestyBite every weekend!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">RK</div>
+          <div>
+            <div class="author-name">Rohan Kapoor</div>
+            <div class="author-loc">📍 Indiranagar, Bengaluru</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Ordered for our office team of 20 people. Delivery was on time, packaging was excellent, and not a single complaint — rare for a group order!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">SM</div>
+          <div>
+            <div class="author-name">Sneha Mehrotra</div>
+            <div class="author-loc">📍 Koramangala, Bengaluru</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars">★★★★☆</div>
+        <p class="testimonial-text">"The Chicken Biryani rivals the best in the city. Fragrant, perfectly cooked rice, generous portions. The kulfi falooda was divine too!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">AT</div>
+          <div>
+            <div class="author-name">Arjun Thomas</div>
+            <div class="author-loc">📍 HSR Layout, Bengaluru</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <span class="logo-text">Zesty<span>Bite</span></span>
+        <p>Bringing authentic Indian flavours to your table since 2009. Every bite tells a story.</p>
+        <div class="social-links" style="margin-top:var(--space-lg);">
+          <a href="#" class="social-link">f</a>
+          <a href="#" class="social-link">in</a>
+          <a href="#" class="social-link">yt</a>
+          <a href="#" class="social-link">ig</a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-col">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Full Menu</a></li>
+          <li><a href="booking.html">Book a Table</a></li>
+          <li><a href="tracking.html">Track Order</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </div>
+
+      <!-- Categories -->
+      <div class="footer-col">
+        <h5>Categories</h5>
+        <ul>
+          <li><a href="menu.html?filter=Starters">Starters</a></li>
+          <li><a href="menu.html?filter=Main+Course">Main Course</a></li>
+          <li><a href="menu.html?filter=Rice+%26+Breads">Rice & Breads</a></li>
+          <li><a href="menu.html?filter=Desserts">Desserts</a></li>
+          <li><a href="menu.html?filter=Beverages">Beverages</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="#">📍 42, Foodie Lane, MG Road</a></li>
+          <li><a href="tel:+919876543210">📞 +91 98765 43210</a></li>
+          <li><a href="mailto:hello@zestybite.com">✉️ hello@zestybite.com</a></li>
+          <li><a href="#">🕐 Mon–Sun: 11 AM – 11 PM</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p style="margin:0;color:rgba(255,255,255,0.4);">© 2025 ZestyBite. All rights reserved.</p>
+      <div style="display:flex;gap:var(--space-lg);">
+        <a href="#" style="color:rgba(255,255,255,0.4);font-size:0.8rem;">Privacy Policy</a>
+        <a href="#" style="color:rgba(255,255,255,0.4);font-size:0.8rem;">Terms of Service</a>
+        <a href="admin.html" style="color:rgba(255,255,255,0.2);font-size:0.78rem;">Admin</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════════════════
+     CART SIDEBAR
+     ══════════════════════════════════════════════════════════ -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>🛒 Your Cart</h3>
+    <button class="cart-close" id="cartCloseBtn" onclick="closeCart()">✕</button>
+  </div>
+
+  <div class="cart-items" id="cartItemsList"></div>
+
+  <div class="cart-empty" id="cartEmpty">
+    <div class="cart-empty-icon">🛒</div>
+    <h4>Your cart is empty</h4>
+    <p>Add some delicious items to get started!</p>
+    <a href="menu.html" class="btn btn-primary" style="margin-top:var(--space-md);" onclick="closeCart()">Browse Menu</a>
+  </div>
+
+  <div class="cart-footer" id="cartFooter" style="display:none;">
+    <div class="cart-total-row"><span>Subtotal</span><span id="cartSubtotal">₹0</span></div>
+    <div class="cart-total-row"><span>Delivery</span><span id="cartDelivery">₹40</span></div>
+    <div class="cart-total-row"><span>GST (5%)</span><span id="cartTaxes">₹0</span></div>
+    <div class="cart-total-row grand"><span>Total</span><span id="cartGrand">₹0</span></div>
+    <button class="btn btn-primary btn-full" style="margin-top:var(--space-md);" id="checkoutBtn">Proceed to Checkout →</button>
+  </div>
+</div>
+
+<!-- Checkout Modal -->
+<div class="modal-overlay" id="checkoutModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Delivery Details</h3>
+      <button class="modal-close" onclick="closeModal('checkoutModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="margin-bottom:var(--space-lg);color:var(--color-text-muted);">We need your delivery details to process the order.</p>
+      <div class="form-group">
+        <label class="form-label">Phone Number *</label>
+        <div class="phone-input-group">
+          <span class="phone-prefix">🇮🇳 +91</span>
+          <input type="tel" id="checkoutPhone" placeholder="98765 43210" maxlength="10">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Area / Location *</label>
+        <input type="text" class="form-control" id="checkoutLocation" placeholder="e.g. Koramangala, HSR Layout">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Full Delivery Address *</label>
+        <textarea class="form-control" id="checkoutAddress" rows="3" placeholder="House/flat number, street name, landmark…"></textarea>
+      </div>
+      <div style="background:var(--color-accent-bg);border-radius:var(--radius-sm);padding:var(--space-md);font-size:0.85rem;color:var(--color-accent);">
+        💡 Free delivery on orders above ₹400. Estimated time: 30–45 minutes.
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('checkoutModal')">Cancel</button>
+      <button class="btn btn-primary" id="confirmOrderBtn" onclick="placeOrder()">Place Order 🎉</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

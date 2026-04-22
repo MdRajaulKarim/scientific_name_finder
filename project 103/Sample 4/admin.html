@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — ZestyBite</title>
+  <meta name="description" content="ZestyBite Admin Dashboard">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <span class="logo-icon">🍛</span>
+      <span class="logo-text">Zesty<span>Bite</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Visit website</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button style="padding:8px 16px;background:var(--color-accent);color:#fff;border-radius:6px;font-weight:600;" onclick="logout()">Logout</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ADMIN LAYOUT -->
+<div class="admin-layout">
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-header">
+      <h4>ADMIN PANEL</h4>
+    </div>
+    <nav class="admin-nav">
+      <div class="admin-nav-item active" onclick="switchSection('dashboard')">
+        <span class="nav-icon">📊</span>
+        <span>Dashboard</span>
+      </div>
+      <div class="admin-nav-item" onclick="switchSection('orders')">
+        <span class="nav-icon">🛒</span>
+        <span>Orders</span>
+        <span class="admin-badge">12</span>
+      </div>
+      <div class="admin-nav-item" onclick="switchSection('bookings')">
+        <span class="nav-icon">📅</span>
+        <span>Bookings</span>
+        <span class="admin-badge">5</span>
+      </div>
+      <div class="admin-nav-item" onclick="switchSection('menu')">
+        <span class="nav-icon">🍽️</span>
+        <span>Menu Items</span>
+      </div>
+      <div class="admin-nav-item" onclick="switchSection('customers')">
+        <span class="nav-icon">👥</span>
+        <span>Customers</span>
+      </div>
+      <div class="admin-nav-item" onclick="switchSection('settings')">
+        <span class="nav-icon">⚙️</span>
+        <span>Settings</span>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="admin-main">
+    <!-- Dashboard Section -->
+    <section class="admin-section active" id="dashboard">
+      <div class="admin-page-title">
+        <h2>Dashboard</h2>
+        <p>Welcome back! Here's your business overview.</p>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="stats-grid">
+        <div class="stat-card fade-up">
+          <div class="stat-label">Today's Orders</div>
+          <div class="stat-value">48</div>
+          <div class="stat-change up">↑ 12% from yesterday</div>
+        </div>
+        <div class="stat-card fade-up">
+          <div class="stat-label">Revenue</div>
+          <div class="stat-value">₹18,240</div>
+          <div class="stat-change up">↑ 8% from yesterday</div>
+        </div>
+        <div class="stat-card fade-up">
+          <div class="stat-label">Active Bookings</div>
+          <div class="stat-value">23</div>
+          <div class="stat-change up">↑ 15% this week</div>
+        </div>
+        <div class="stat-card fade-up">
+          <div class="stat-label">Avg Rating</div>
+          <div class="stat-value">4.8★</div>
+          <div class="stat-change">From 142 reviews</div>
+        </div>
+      </div>
+
+      <!-- Charts Section -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-lg);">
+        <div class="admin-card fade-up">
+          <div class="admin-card-title">
+            <span class="icon">📈</span>
+            Sales This Week
+          </div>
+          <div class="chart-placeholder">
+            <div class="chart-bar" style="height:45%;"></div>
+            <div class="chart-bar" style="height:60%;"></div>
+            <div class="chart-bar" style="height:55%;"></div>
+            <div class="chart-bar" style="height:70%;"></div>
+            <div class="chart-bar" style="height:65%;"></div>
+            <div class="chart-bar" style="height:80%;"></div>
+            <div class="chart-bar" style="height:75%;"></div>
+          </div>
+        </div>
+
+        <div class="admin-card fade-up">
+          <div class="admin-card-title">
+            <span class="icon">⏰</span>
+            Peak Hours
+          </div>
+          <div style="padding:var(--space-md) 0;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:var(--space-md);">
+              <span>12:00 PM - 2:00 PM</span>
+              <span style="font-weight:600;color:var(--color-accent);">42%</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:var(--space-md);">
+              <span>6:00 PM - 8:00 PM</span>
+              <span style="font-weight:600;color:var(--color-accent);">35%</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;">
+              <span>8:00 PM - 11:00 PM</span>
+              <span style="font-weight:600;color:var(--color-accent);">23%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Orders Section -->
+    <section class="admin-section" id="orders">
+      <div class="admin-page-title">
+        <h2>Recent Orders</h2>
+        <p>Manage and track all customer orders</p>
+      </div>
+
+      <div class="admin-table-wrap fade-up">
+        <div class="table-header">
+          <h4>12 Pending Orders</h4>
+          <button class="btn btn-sm btn-primary">Export</button>
+        </div>
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Items</th>
+              <th>Total</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#ZB001234</td>
+              <td>Rohan Kapoor</td>
+              <td>Butter Chicken, Naan</td>
+              <td>₹460</td>
+              <td><span class="status-badge confirmed">Confirmed</span></td>
+              <td><button class="btn btn-sm btn-ghost" onclick="showToast('View order details', 'info')">View</button></td>
+            </tr>
+            <tr>
+              <td>#ZB001235</td>
+              <td>Sneha Mehrotra</td>
+              <td>Biryani, Raita, Dessert</td>
+              <td>₹680</td>
+              <td><span class="status-badge preparing">Preparing</span></td>
+              <td><button class="btn btn-sm btn-ghost" onclick="showToast('View order details', 'info')">View</button></td>
+            </tr>
+            <tr>
+              <td>#ZB001236</td>
+              <td>Arjun Thomas</td>
+              <td>Chicken Tikka Masala</td>
+              <td>₹520</td>
+              <td><span class="status-badge pending">Pending</span></td>
+              <td><button class="btn btn-sm btn-ghost" onclick="showToast('View order details', 'info')">View</button></td>
+            </tr>
+            <tr>
+              <td>#ZB001237</td>
+              <td>Priya Singh</td>
+              <td>Paneer Tikka, Dal Makhani</td>
+              <td>₹580</td>
+              <td><span class="status-badge delivered">Delivered</span></td>
+              <td><button class="btn btn-sm btn-ghost" onclick="showToast('View order details', 'info')">View</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Bookings Section -->
+    <section class="admin-section" id="bookings">
+      <div class="admin-page-title">
+        <h2>Table Bookings</h2>
+        <p>Manage restaurant reservations</p>
+      </div>
+
+      <div class="admin-table-wrap fade-up">
+        <div class="table-header">
+          <h4>5 Upcoming Bookings</h4>
+          <button class="btn btn-sm btn-primary">Add Booking</button>
+        </div>
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Date & Time</th>
+              <th>Guest Name</th>
+              <th>Party Size</th>
+              <th>Phone</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Dec 20, 7:00 PM</td>
+              <td>Vikram Patel</td>
+              <td>4 persons</td>
+              <td>+91 98765 12345</td>
+              <td><span class="status-badge confirmed">Confirmed</span></td>
+              <td><button class="btn btn-sm btn-ghost" onclick="showToast('Booking details', 'info')">Edit</button></td>
+            </tr>
+            <tr>
+              <td>Dec 21, 8:30 PM</td>
+              <td>Anjali Gupta</td>
+              <td>6 persons</td>
+              <td>+91 98765 67890</td>
+              <td><span class="status-badge confirmed">Confirmed</span></td>
+              <td><button class="btn btn-sm btn-ghost" onclick="showToast('Booking details', 'info')">Edit</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="admin-section" id="menu">
+      <div class="admin-page-title">
+        <h2>Menu Management</h2>
+        <p>Add, edit, or remove menu items</p>
+      </div>
+
+      <div class="admin-card fade-up">
+        <div class="admin-card-title">
+          <span class="icon">➕</span>
+          Add New Item
+        </div>
+        <form onsubmit="addMenuItem(event)">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-lg);">
+            <div class="form-group">
+              <label class="form-label">Item Name</label>
+              <input type="text" class="form-control" placeholder="e.g. Butter Chicken">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Price (₹)</label>
+              <input type="number" class="form-control" placeholder="e.g. 280">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Category</label>
+              <select class="form-control">
+                <option>Starters</option>
+                <option>Main Course</option>
+                <option>Rice & Breads</option>
+                <option>Desserts</option>
+                <option>Beverages</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Type</label>
+              <select class="form-control">
+                <option>Veg</option>
+                <option>Non-Veg</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="margin-top:var(--space-lg);">Add Item</button>
+        </form>
+      </div>
+
+      <div class="admin-table-wrap fade-up" style="margin-top:var(--space-lg);">
+        <div class="table-header">
+          <h4>Menu Items (50 total)</h4>
+        </div>
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Category</th>
+              <th>Type</th>
+              <th>Price</th>
+              <th>Rating</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Butter Chicken</td>
+              <td>Main Course</td>
+              <td>Non-Veg</td>
+              <td>₹280</td>
+              <td>⭐ 4.9 (340 reviews)</td>
+              <td><button class="btn btn-sm btn-ghost" onclick="showToast('Edit item', 'info')">Edit</button></td>
+            </tr>
+            <tr>
+              <td>Paneer Tikka Masala</td>
+              <td>Main Course</td>
+              <td>Veg</td>
+              <td>₹240</td>
+              <td>⭐ 4.7 (215 reviews)</td>
+              <td><button class="btn btn-sm btn-ghost" onclick="showToast('Edit item', 'info')">Edit</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Customers Section -->
+    <section class="admin-section" id="customers">
+      <div class="admin-page-title">
+        <h2>Customer Management</h2>
+        <p>View and manage registered customers</p>
+      </div>
+
+      <div class="admin-table-wrap fade-up">
+        <div class="table-header">
+          <h4>Total Customers: 1,234</h4>
+          <div style="display:flex;gap:var(--space-sm);">
+            <input type="text" class="form-control" placeholder="Search..." style="max-width:200px;">
+            <button class="btn btn-sm btn-ghost">Filter</button>
+          </div>
+        </div>
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Orders</th>
+              <th>Last Order</th>
+              <th>Total Spent</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Rohan Kapoor</td>
+              <td>+91 98765 43210</td>
+              <td>24</td>
+              <td>Dec 18, 2024</td>
+              <td>₹5,480</td>
+              <td><button class="btn btn-sm btn-ghost" onclick="showToast('View customer details', 'info')">View</button></td>
+            </tr>
+            <tr>
+              <td>Sneha Mehrotra</td>
+              <td>+91 98765 54321</td>
+              <td>18</td>
+              <td>Dec 15, 2024</td>
+              <td>₹4,120</td>
+              <td><button class="btn btn-sm btn-ghost" onclick="showToast('View customer details', 'info')">View</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Settings Section -->
+    <section class="admin-section" id="settings">
+      <div class="admin-page-title">
+        <h2>Settings</h2>
+        <p>Configure your restaurant preferences</p>
+      </div>
+
+      <div class="admin-card fade-up">
+        <div class="admin-card-title">
+          <span class="icon">🏢</span>
+          Restaurant Settings
+        </div>
+        <div class="form-group">
+          <label class="form-label">Restaurant Name</label>
+          <input type="text" class="form-control" value="ZestyBite">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone</label>
+          <input type="tel" class="form-control" value="+91 98765 43210">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Address</label>
+          <textarea class="form-control" rows="2">42, Foodie Lane, MG Road, Bengaluru</textarea>
+        </div>
+        <button class="btn btn-primary" onclick="showToast('✅ Settings saved!', 'success')">Save Changes</button>
+      </div>
+
+      <div class="admin-card fade-up">
+        <div class="admin-card-title">
+          <span class="icon">⚡</span>
+          Feature Toggles
+        </div>
+        <div class="toggle-wrap">
+          <span>Online Ordering</span>
+          <label class="toggle">
+            <input type="checkbox" checked>
+            <span class="toggle-track"></span>
+          </label>
+        </div>
+        <div class="toggle-wrap">
+          <span>Table Booking</span>
+          <label class="toggle">
+            <input type="checkbox" checked>
+            <span class="toggle-track"></span>
+          </label>
+        </div>
+        <div class="toggle-wrap">
+          <span>Delivery Service</span>
+          <label class="toggle">
+            <input type="checkbox" checked>
+            <span class="toggle-track"></span>
+          </label>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- Toast container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="js/main.js"></script>
+<script src="js/admin-logic.js"></script>
+<script>
+  function switchSection(sectionId) {
+    // Hide all sections
+    document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.admin-nav-item').forEach(item => item.classList.remove('active'));
+
+    // Show selected section
+    document.getElementById(sectionId).classList.add('active');
+    event.target.closest('.admin-nav-item').classList.add('active');
+  }
+
+  function addMenuItem(e) {
+    e.preventDefault();
+    showToast('✅ Menu item added successfully!', 'success');
+  }
+
+  function logout() {
+    showToast('👋 Logging out...', 'info');
+    setTimeout(() => window.location.href = 'index.html', 1500);
+  }
+
+  // Edit Modal Functions
+  function openOrderModal(orderId, customer, items, total, status) {
+    const modal = `
+      <div class="modal-overlay open" id="editModal" onclick="closeEditModal()">
+        <div class="modal" onclick="event.stopPropagation()">
+          <div class="modal-header">
+            <h3>Order Details: ${orderId}</h3>
+            <button class="modal-close" onclick="closeEditModal()">✕</button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label class="form-label">Customer Name</label>
+              <input type="text" class="form-control" value="${customer}" readonly>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Items</label>
+              <input type="text" class="form-control" value="${items}" readonly>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Total Amount</label>
+              <input type="text" class="form-control" value="${total}" readonly>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Status</label>
+              <select class="form-control">
+                <option value="pending" ${status === 'pending' ? 'selected' : ''}>Pending</option>
+                <option value="confirmed" ${status === 'confirmed' ? 'selected' : ''}>Confirmed</option>
+                <option value="preparing" ${status === 'preparing' ? 'selected' : ''}>Preparing</option>
+                <option value="delivered" ${status === 'delivered' ? 'selected' : ''}>Delivered</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-ghost" onclick="closeEditModal()">Cancel</button>
+            <button class="btn btn-primary" onclick="saveOrder('${orderId}')">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modal);
+  }
+
+  function openBookingModal(name, phone, guests, dateTime) {
+    const modal = `
+      <div class="modal-overlay open" id="editModal" onclick="closeEditModal()">
+        <div class="modal" onclick="event.stopPropagation()">
+          <div class="modal-header">
+            <h3>Edit Booking</h3>
+            <button class="modal-close" onclick="closeEditModal()">✕</button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label class="form-label">Guest Name</label>
+              <input type="text" class="form-control" value="${name}">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone</label>
+              <input type="tel" class="form-control" value="${phone}">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Number of Guests</label>
+              <input type="number" class="form-control" value="${guests}">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Date & Time</label>
+              <input type="text" class="form-control" value="${dateTime}">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-ghost" onclick="closeEditModal()">Cancel</button>
+            <button class="btn btn-primary" onclick="saveBooking('${name}')">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modal);
+  }
+
+  function openMenuModal(item, category, type, price) {
+    const modal = `
+      <div class="modal-overlay open" id="editModal" onclick="closeEditModal()">
+        <div class="modal" onclick="event.stopPropagation()">
+          <div class="modal-header">
+            <h3>Edit Menu Item</h3>
+            <button class="modal-close" onclick="closeEditModal()">✕</button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label class="form-label">Item Name</label>
+              <input type="text" class="form-control" value="${item}">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Category</label>
+              <select class="form-control">
+                <option ${category === 'Main Course' ? 'selected' : ''}>Main Course</option>
+                <option ${category === 'Starters' ? 'selected' : ''}>Starters</option>
+                <option ${category === 'Rice & Breads' ? 'selected' : ''}>Rice & Breads</option>
+                <option ${category === 'Desserts' ? 'selected' : ''}>Desserts</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Type</label>
+              <select class="form-control">
+                <option ${type === 'Veg' ? 'selected' : ''}>Veg</option>
+                <option ${type === 'Non-Veg' ? 'selected' : ''}>Non-Veg</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Price (₹)</label>
+              <input type="number" class="form-control" value="${price}">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-ghost" onclick="closeEditModal()">Cancel</button>
+            <button class="btn btn-primary" onclick="saveMenuItem('${item}')">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modal);
+  }
+
+  function openCustomerModal(name, phone, orders, spent) {
+    const modal = `
+      <div class="modal-overlay open" id="editModal" onclick="closeEditModal()">
+        <div class="modal" onclick="event.stopPropagation()">
+          <div class="modal-header">
+            <h3>Customer Profile</h3>
+            <button class="modal-close" onclick="closeEditModal()">✕</button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label class="form-label">Customer Name</label>
+              <input type="text" class="form-control" value="${name}" readonly>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone</label>
+              <input type="tel" class="form-control" value="${phone}" readonly>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-lg);">
+              <div>
+                <div style="font-size:0.8rem;color:var(--color-text-muted);text-transform:uppercase;">Total Orders</div>
+                <div style="font-size:1.8rem;font-weight:700;color:var(--color-accent);">${orders}</div>
+              </div>
+              <div>
+                <div style="font-size:0.8rem;color:var(--color-text-muted);text-transform:uppercase;">Total Spent</div>
+                <div style="font-size:1.8rem;font-weight:700;color:var(--color-accent);">${spent}</div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" onclick="closeEditModal()">Close</button>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modal);
+  }
+
+  function closeEditModal() {
+    const modal = document.getElementById('editModal');
+    if (modal) modal.remove();
+  }
+
+  function saveOrder(orderId) {
+    showToast(`✅ Order ${orderId} updated successfully!`, 'success');
+    closeEditModal();
+  }
+
+  function saveBooking(name) {
+    showToast(`✅ Booking for ${name} updated!`, 'success');
+    closeEditModal();
+  }
+
+  function saveMenuItem(item) {
+    showToast(`✅ ${item} updated successfully!`, 'success');
+    closeEditModal();
+  }
+
+  // Trigger fade-up animations on page load
+  document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+</script>
+</body>
+</html>

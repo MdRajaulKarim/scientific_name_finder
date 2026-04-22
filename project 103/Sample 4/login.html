@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — ZestyBite</title>
+  <meta name="description" content="Login to your ZestyBite account. Access orders, bookings, and exclusive offers.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <span class="logo-icon">🍛</span>
+      <span class="logo-text">Zesty<span>Bite</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="booking.html">Reserve</a></li>
+      <li><a href="tracking.html">Track Order</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="cart-btn" onclick="openCart()">
+        <span class="cart-icon">🛒</span>
+        Cart&nbsp;<span class="cart-count">0</span>
+      </button>
+      <a href="login.html" class="btn-login-nav" id="navLoginBtn" style="opacity:0.5;">Login</a>
+      <button style="display:none;" id="navUserBtn"></button>
+      <button class="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- LOGIN PAGE -->
+<div class="login-page">
+  <!-- Visual Side -->
+  <div class="login-visual">
+    <div style="position:relative;z-index:1;text-align:center;">
+      <div style="font-size:5rem;margin-bottom:var(--space-lg);">🍛</div>
+      <h2 style="color:#fff;margin-bottom:var(--space-md);">Welcome to ZestyBite</h2>
+      <p style="font-size:1rem;color:rgba(255,255,255,0.85);max-width:400px;line-height:1.7;">Sign in to access your orders, bookings, and exclusive offers. Join thousands of happy customers!</p>
+    </div>
+  </div>
+
+  <!-- Login Panel -->
+  <div class="login-panel">
+    <div class="login-box">
+      <!-- Step 1: Phone -->
+      <div class="login-step active" id="phoneStep">
+        <h2>Sign In</h2>
+        <p class="subtitle">Enter your phone number to continue</p>
+
+        <form onsubmit="submitPhone(event)">
+          <div class="form-group">
+            <label class="form-label">Phone Number *</label>
+            <div class="phone-input-group">
+              <span class="phone-prefix">🇮🇳 +91</span>
+              <input type="tel" id="loginPhone" placeholder="98765 43210" maxlength="10" required>
+            </div>
+            <div class="form-hint">We'll send you an OTP to verify</div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg btn-full">Send OTP</button>
+
+          <p style="text-align:center;font-size:0.85rem;color:var(--color-text-muted);margin-top:var(--space-lg);">
+            Don't have an account? <a href="#" onclick="showToast('Sign up coming soon!', 'info')" style="color:var(--color-accent);font-weight:600;">Sign up</a>
+          </p>
+        </form>
+      </div>
+
+      <!-- Step 2: OTP -->
+      <div class="login-step" id="otpStep">
+        <h2>Verify OTP</h2>
+        <p class="subtitle">Enter the 6-digit code sent to your phone</p>
+
+        <form onsubmit="submitOTP(event)">
+          <div class="form-group">
+            <label class="form-label">OTP Code *</label>
+            <div class="otp-inputs">
+              <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]" required>
+              <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]" required>
+              <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]" required>
+              <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]" required>
+              <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]" required>
+              <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]" required>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg btn-full">Verify & Sign In</button>
+
+          <div class="resend-timer">
+            Didn't receive code? <button type="button" class="resend-btn" id="resendBtn" onclick="resendOTP()">Resend in 30s</button>
+          </div>
+
+          <button type="button" class="btn btn-ghost btn-lg btn-full" style="margin-top:var(--space-md);" onclick="backToPhone()">← Back to Phone</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer" style="margin-top:var(--space-3xl);">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo-text">Zesty<span>Bite</span></span>
+        <p>Bringing authentic Indian flavours to your table since 2009.</p>
+        <div class="social-links" style="margin-top:var(--space-lg);">
+          <a href="#" class="social-link">f</a>
+          <a href="#" class="social-link">in</a>
+          <a href="#" class="social-link">yt</a>
+          <a href="#" class="social-link">ig</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="booking.html">Book a Table</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="#">📍 42, Foodie Lane, MG Road</a></li>
+          <li><a href="tel:+919876543210">📞 +91 98765 43210</a></li>
+          <li><a href="mailto:hello@zestybite.com">✉️ hello@zestybite.com</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p style="margin:0;color:rgba(255,255,255,0.4);">© 2025 ZestyBite. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Toast container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="js/main.js"></script>
+<script src="js/auth.js"></script>
+<script>
+  let otpTimer = 30;
+
+  function submitPhone(e) {
+    e.preventDefault();
+    const phone = document.getElementById('loginPhone').value;
+    if (phone.length === 10) {
+      showToast(`✅ OTP sent to +91${phone}`, 'success');
+      document.getElementById('phoneStep').classList.remove('active');
+      document.getElementById('otpStep').classList.add('active');
+      startResendTimer();
+    }
+  }
+
+  function submitOTP(e) {
+    e.preventDefault();
+    const otpInputs = document.querySelectorAll('.otp-digit');
+    const otp = Array.from(otpInputs).map(input => input.value).join('');
+    if (otp.length === 6) {
+      showToast('✅ Welcome back! Signing you in...', 'success');
+      setTimeout(() => window.location.href = 'index.html', 1500);
+    }
+  }
+
+  function backToPhone() {
+    document.getElementById('otpStep').classList.remove('active');
+    document.getElementById('phoneStep').classList.add('active');
+    clearInterval(window.resendInterval);
+  }
+
+  function resendOTP() {
+    showToast('✅ OTP resent to your phone', 'success');
+    startResendTimer();
+  }
+
+  function startResendTimer() {
+    const btn = document.getElementById('resendBtn');
+    let timer = 30;
+    btn.disabled = true;
+    btn.textContent = `Resend in ${timer}s`;
+
+    if (window.resendInterval) clearInterval(window.resendInterval);
+    window.resendInterval = setInterval(() => {
+      timer--;
+      btn.textContent = timer > 0 ? `Resend in ${timer}s` : 'Resend';
+      if (timer <= 0) {
+        clearInterval(window.resendInterval);
+        btn.disabled = false;
+      }
+    }, 1000);
+  }
+
+  // Allow OTP input navigation
+  const otpInputs = document.querySelectorAll('.otp-digit');
+  otpInputs.forEach((input, i) => {
+    input.addEventListener('input', (e) => {
+      if (e.target.value && i < otpInputs.length - 1) {
+        otpInputs[i + 1].focus();
+      }
+      e.target.classList.toggle('filled', !!e.target.value);
+    });
+    input.addEventListener('backspace', () => {
+      if (!input.value && i > 0) otpInputs[i - 1].focus();
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ZestyBite Admin | Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .admin-container { padding: 40px 5%; display: flex; gap: 30px; }
+        .stat-box { background: white; padding: 20px; border-left: 5px solid var(--color-accent); flex: 1; }
+        .control-panel { background: white; padding: 20px; margin-top: 20px; }
+    </style>
+</head>
+<body style="background: #eee;">
+
+<nav>
+    <div class="logo"><h1>ZestyBite Admin</h1></div>
+    <a href="index.html">View Site</a>
+</nav>
+
+<div class="admin-container">
+    <div class="stat-box"><h3>Orders Today</h3><p>24</p></div>
+    <div class="stat-box"><h3>Table Bookings</h3><p>8</p></div>
+    <div class="stat-box"><h3>Revenue</h3><p>₹12,450</p></div>
+</div>
+
+<div style="padding: 0 5%;">
+    <div class="control-panel">
+        <h2>Manage Menu & Restrictions</h2>
+        <hr><br>
+        <p><strong>Delivery Location Restriction:</strong> 
+            <input type="text" placeholder="Enter Restricted Zip Codes"> 
+            <button class="add-btn" style="width: auto; padding: 5px 20px;">Save</button>
+        </p>
+        <br>
+        <p><strong>Update Offers:</strong> 
+            <input type="text" placeholder="New Slider Offer Title">
+            <button class="add-btn" style="width: auto; padding: 5px 20px;">Push to Live</button>
+        </p>
+    </div>
+
+    <div class="control-panel">
+        <h2>Live Orders (Thermal Printing Enabled)</h2>
+        <table border="1" style="width:100%; border-collapse: collapse; margin-top: 15px;">
+            <tr style="background: #ddd;">
+                <th>Order ID</th><th>Items</th><th>Location</th><th>Action</th>
+            </tr>
+            <tr>
+                <td>#9921</td><td>1x Pizza, 1x Coke</td><td>Sector 14</td>
+                <td><button onclick="alert('Printing Receipt...')">PRINT RECEIPT</button></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

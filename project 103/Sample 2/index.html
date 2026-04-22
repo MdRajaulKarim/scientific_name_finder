@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ZestyBite | Order Online</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav>
+    <div class="logo"><h1>ZestyBite</h1></div>
+    <div class="nav-links">
+        <a href="booking.html" style="margin-right:20px; text-decoration:none; color:inherit;">Table Booking</a>
+        <a href="login.html" style="margin-right:20px; text-decoration:none; color:inherit;">Login</a>
+        <span class="cart-display">Cart:<span id="cartCount">0</span></span>
+    </div>
+</nav>
+
+<header id="slider" style="height: 300px; background: #333; color: white; display: flex; align-items: center; justify-content: center; text-align: center;">
+    <div id="slideContent">
+        <h2 id="slideTitle">Loading Offers...</h2>
+        <p id="slideSub">Check back in a second!</p>
+    </div>
+</header>
+
+<div class="search-section">
+    <input type="text" id="searchInput" placeholder="Search by name or item ID..." style="flex: 2;">
+    <select id="typeFilter" style="flex: 1;">
+        <option value="all">All Types</option>
+        <option value="veg">Veg Only</option>
+        <option value="nonveg">Non-Veg Only</option>
+    </select>
+</div>
+
+<main class="menu-grid" id="menuContainer">
+    <div class="product-card" data-name="margherita pizza" data-id="101" data-type="veg">
+        <div class="symbol-box">
+            <div class="square-border veg-style"><div class="veg-dot"></div></div>
+        </div>
+        <img src="https://via.placeholder.com/300x200" alt="Food">
+        <div class="card-content">
+            <h3>Margherita Pizza (ID: 101)</h3>
+            <div class="stars">★★★★☆</div>
+            <p><strong>₹199</strong></p>
+            <button class="add-btn" onclick="addToCart()">ADD TO CART</button>
+        </div>
+    </div>
+
+    <div class="product-card" data-name="chicken burger" data-id="102" data-type="nonveg">
+        <div class="symbol-box">
+            <div class="square-border nonveg-style"><div class="nonveg-tri"></div></div>
+        </div>
+        <img src="https://via.placeholder.com/300x200" alt="Food">
+        <div class="card-content">
+            <h3>Classic Chicken Burger (ID: 102)</h3>
+            <div class="stars">★★★★★</div>
+            <p><strong>₹249</strong></p>
+            <button class="add-btn" onclick="addToCart()">ADD TO CART</button>
+        </div>
+    </div>
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>

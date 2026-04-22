@@ -1,0 +1,128 @@
+/* COLOR REGISTRY (The IDs) */
+:root {
+    --color-base: #FAF9F6;      /* 60% - Main Background */
+    --color-secondary: #FFFFFF; /* 30% - Cards & Nav */
+    --color-accent: #FF4500;    /* 10% - Buttons & Highlights */
+    
+    --text-main: #2D2D2D;
+    --veg-color: #2E7D32;
+    --nonveg-color: #795548;
+    --star-gold: #FFD700;
+}
+
+* {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background-color: var(--color-base);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+/* NAVIGATION */
+nav {
+    background: var(--color-secondary);
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0; z-index: 1000;
+}
+
+.logo h1 { color: var(--color-accent); font-weight: 800; }
+
+/* HIGHLIGHTED CART (No Circle) */
+.cart-display {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+#cartCount {
+    color: var(--color-accent);
+    font-weight: 900;
+    font-size: 1.4rem;
+    margin-left: 5px;
+    /* Explicitly no border-radius or background */
+}
+
+/* PRODUCT CARDS */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 2rem 5%;
+}
+
+.product-card {
+    background: var(--color-secondary);
+    border: 1px solid #eee;
+    position: relative;
+    padding-bottom: 15px;
+    transition: 0.3s;
+}
+
+.product-card img { width: 100%; height: 200px; object-fit: cover; }
+
+.card-content { padding: 15px; }
+
+/* VEG/NON-VEG SYMBOLS (Top Right) */
+.symbol-box {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.square-border {
+    width: 18px;
+    height: 18px;
+    border: 2px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.veg-dot { width: 10px; height: 10px; background: var(--veg-color); border-radius: 50%; }
+.nonveg-tri { 
+    width: 0; height: 0; 
+    border-left: 6px solid transparent; 
+    border-right: 6px solid transparent; 
+    border-bottom: 10px solid var(--nonveg-color); 
+}
+
+.veg-style { border-color: var(--veg-color); }
+.nonveg-style { border-color: var(--nonveg-color); }
+
+/* UI ELEMENTS */
+.stars { color: var(--star-gold); margin: 5px 0; }
+.add-btn {
+    background: var(--color-accent);
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.search-section {
+    padding: 20px 5%;
+    display: flex;
+    gap: 10px;
+}
+
+input, select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}

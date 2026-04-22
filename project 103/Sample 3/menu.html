@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu | ZestyBite</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav>
+    <div class="logo"><h1>ZestyBite</h1></div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="booking.html">Book Table</a>
+        <span class="cart-display">Items:<span id="cartCount">0</span></span>
+    </div>
+</nav>
+
+<div class="search-section">
+    <input type="text" id="searchInput" placeholder="Search dish by name or ID (e.g. 101)..." oninput="filterMenu()">
+    <select id="typeFilter" onchange="filterMenu()">
+        <option value="all">All Items</option>
+        <option value="veg">Veg Only</option>
+        <option value="nonveg">Non-Veg Only</option>
+    </select>
+</div>
+
+<section style="padding: 0 5%;">
+    <h2 style="border-left: 5px solid var(--color-accent); padding-left: 10px;">Our Specials</h2>
+</section>
+
+<main class="menu-grid" id="menuContainer">
+    <div class="product-card" data-name="paneer pizza" data-id="101" data-type="veg">
+        <div class="symbol-box">
+            <div class="square-border veg-style"><div class="veg-dot"></div></div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=300" alt="Paneer Pizza">
+        <div class="card-content">
+            <h3>Paneer Pizza (ID: 101)</h3>
+            <div class="stars">★★★★☆</div>
+            <p><strong>₹249</strong></p>
+            <button class="add-btn" onclick="addToCart('Paneer Pizza', 249)">ADD TO CART</button>
+        </div>
+    </div>
+
+    <div class="product-card" data-name="chicken burger" data-id="102" data-type="nonveg">
+        <div class="symbol-box">
+            <div class="square-border nonveg-style"><div class="nonveg-tri"></div></div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300" alt="Chicken Burger">
+        <div class="card-content">
+            <h3>Chicken Burger (ID: 102)</h3>
+            <div class="stars">★★★★★</div>
+            <p><strong>₹189</strong></p>
+            <button class="add-btn" onclick="addToCart('Chicken Burger', 189)">ADD TO CART</button>
+        </div>
+    </div>
+
+    <div class="product-card" data-name="margherita pizza" data-id="103" data-type="veg">
+        <div class="symbol-box">
+            <div class="square-border veg-style"><div class="veg-dot"></div></div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=300" alt="Margherita Pizza">
+        <div class="card-content">
+            <h3>Classic Margherita (ID: 103)</h3>
+            <div class="stars">★★★★★</div>
+            <p><strong>₹199</strong></p>
+            <button class="add-btn" onclick="addToCart('Classic Margherita', 199)">ADD TO CART</button>
+        </div>
+    </div>
+
+    <div class="product-card" data-name="tandoori chicken" data-id="104" data-type="nonveg">
+        <div class="symbol-box">
+            <div class="square-border nonveg-style"><div class="nonveg-tri"></div></div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1586190936529-385d55d22cc5?w=300" alt="Tandoori Chicken">
+        <div class="card-content">
+            <h3>Tandoori Chicken (ID: 104)</h3>
+            <div class="stars">★★★★★</div>
+            <p><strong>₹399</strong></p>
+            <button class="add-btn" onclick="addToCart('Tandoori Chicken', 399)">ADD TO CART</button>
+        </div>
+    </div>
+
+    <div class="product-card" data-name="vegetable spring roll" data-id="105" data-type="veg">
+        <div class="symbol-box">
+            <div class="square-border veg-style"><div class="veg-dot"></div></div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1599599810694-b308ca884e21?w=300" alt="Spring Roll">
+        <div class="card-content">
+            <h3>Vegetable Spring Rolls (ID: 105)</h3>
+            <div class="stars">★★★★☆</div>
+            <p><strong>₹129</strong></p>
+            <button class="add-btn" onclick="addToCart('Vegetable Spring Rolls', 129)">ADD TO CART</button>
+        </div>
+    </div>
+
+    <div class="product-card" data-name="grilled fish" data-id="106" data-type="nonveg">
+        <div class="symbol-box">
+            <div class="square-border nonveg-style"><div class="nonveg-tri"></div></div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=300" alt="Grilled Fish">
+        <div class="card-content">
+            <h3>Grilled Fish Fillet (ID: 106)</h3>
+            <div class="stars">★★★★★</div>
+            <p><strong>₹449</strong></p>
+            <button class="add-btn" onclick="addToCart('Grilled Fish Fillet', 449)">ADD TO CART</button>
+        </div>
+    </div>
+</main>
+
+<div id="deliveryModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:2000; justify-content:center; align-items:center;">
+    <div style="background:white; padding:30px; width:90%; max-width:400px; border-radius:8px;">
+        <h3>Delivery Details</h3>
+        <p id="selectedItemName" style="font-weight:bold; color:var(--color-accent);"></p>
+        <hr><br>
+        <label>Phone Number</label>
+        <input type="tel" id="deliveryPhone" placeholder="10 Digit Number" style="width:100%; margin-bottom:15px;">
+        
+        <label>Delivery Location (Address)</label>
+        <textarea id="deliveryAddress" placeholder="Apt, Street, Zip Code" style="width:100%; height:80px; margin-bottom:15px;"></textarea>
+        
+        <button class="add-btn" onclick="confirmOrder()">CONFIRM & PAY</button>
+        <button onclick="document.getElementById('deliveryModal').style.display='none'" style="width:100%; margin-top:10px; background:none; border:none; cursor:pointer;">Cancel</button>
+    </div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

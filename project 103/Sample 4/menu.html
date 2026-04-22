@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu — ZestyBite</title>
+  <meta name="description" content="Explore ZestyBite's full menu — starters, mains, biryanis, desserts and beverages. Order online for delivery or dining.">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── Category sticky sidebar ── */
+    .menu-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: var(--space-2xl);
+      align-items: start;
+    }
+
+    .category-nav {
+      position: sticky;
+      top: 90px;
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+
+    .category-nav-header {
+      padding: var(--space-md) var(--space-lg);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      border-bottom: 1px solid var(--color-border);
+      background: var(--color-base);
+    }
+
+    .category-link {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: 12px var(--space-lg);
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      border-left: 3px solid transparent;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .category-link:hover {
+      background: var(--color-base);
+      color: var(--color-accent);
+      border-left-color: var(--color-accent);
+    }
+
+    .category-link.active {
+      background: var(--color-accent-bg);
+      color: var(--color-accent);
+      border-left-color: var(--color-accent);
+      font-weight: 600;
+    }
+
+    .category-count {
+      margin-left: auto;
+      font-size: 0.72rem;
+      color: var(--color-text-muted);
+      background: var(--color-base-dark);
+      padding: 2px 8px;
+      border-radius: 30px;
+    }
+
+    /* Menu section header */
+    .menu-section-title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: var(--space-2xl) 0 var(--space-lg);
+      padding-bottom: var(--space-sm);
+      border-bottom: 2px solid var(--color-border);
+      color: var(--color-text-primary);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .menu-section-title::after {
+      content: '';
+      flex: 1;
+    }
+
+    /* Menu Item Styling */
+    .menu-item {
+      padding: var(--space-md);
+      background: var(--color-white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .item-header {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--color-text-primary);
+      margin-bottom: 4px;
+    }
+
+    .item-price {
+      font-size: 0.9rem;
+      color: var(--color-accent);
+      font-weight: 700;
+    }
+
+    .original-price {
+      text-decoration: line-through;
+      color: var(--color-text-muted);
+      font-weight: 400;
+      margin-left: 8px;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-lg);
+    }
+
+    @media (max-width: 768px) {
+      .menu-layout { grid-template-columns: 1fr; }
+      .category-nav { position: static; display: flex; overflow-x: auto; border-radius: var(--radius-md); }
+      .category-nav-header { display: none; }
+      .category-link { white-space: nowrap; border-left: none; border-bottom: 3px solid transparent; }
+      .category-link.active { border-bottom-color: var(--color-accent); border-left: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <span class="logo-icon">🍛</span>
+      <span class="logo-text">Zesty<span>Bite</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html" class="active">Menu</a></li>
+      <li><a href="booking.html">Reserve</a></li>
+      <li><a href="tracking.html">Track Order</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="cart-btn" onclick="openCart()">
+        <span class="cart-icon">🛒</span>
+        Cart&nbsp;<span class="cart-count">0</span>
+      </button>
+      <a href="login.html" class="btn-login-nav" id="navLoginBtn">Login</a>
+      <button style="display:none;" id="navUserBtn"></button>
+      <button class="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <a href="index.html">🏠 Home</a>
+  <a href="menu.html">🍽️ Menu</a>
+  <a href="booking.html">📅 Reserve</a>
+  <a href="tracking.html">📦 Track</a>
+  <a href="login.html">👤 Login</a>
+</div>
+
+<!-- PAGE HERO -->
+<div style="background:linear-gradient(135deg,#1a0800 0%,#3d1500 60%,#8B3A00 100%);padding:var(--space-2xl) var(--space-lg);margin-top:70px;text-align:center;color:#fff;">
+  <span class="section-tag" style="color:rgba(255,255,255,0.7);">Fresh & Authentic</span>
+  <h1 style="color:#fff;margin-bottom:var(--space-sm);">Our Full Menu</h1>
+  <p style="color:rgba(255,255,255,0.8);max-width:500px;margin:0 auto;">From fiery starters to indulgent desserts — every dish crafted with tradition and love.</p>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container" style="padding-top:var(--space-2xl);padding-bottom:var(--space-3xl);">
+
+  <!-- Search & Filter Bar -->
+  <div class="search-filter-bar fade-up">
+    <div class="search-row">
+      <div class="search-input-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" id="menuSearch" placeholder="Search by name or Item ID (e.g. ZB001)…">
+      </div>
+      <button class="btn btn-ghost" onclick="clearSearch()" title="Clear search">✕ Clear</button>
+    </div>
+
+    <div class="filter-chips">
+      <span style="font-size:0.8rem;font-weight:600;color:var(--color-text-muted);align-self:center;">Food Type:</span>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <button class="filter-chip active" data-filter-type="type" data-filter-value="all" style="background:var(--color-base);border:2px solid var(--color-accent);color:var(--color-accent);font-weight:600;">All Items</button>
+        <button class="filter-chip" data-filter-type="type" data-filter-value="veg" style="background:rgba(76,175,80,0.1);border:2px solid #4CAF50;color:#4CAF50;font-weight:600;">🟢 Veg Only</button>
+        <button class="filter-chip" data-filter-type="type" data-filter-value="non-veg" style="background:rgba(244,67,54,0.1);border:2px solid #F44336;color:#F44336;font-weight:600;">🔴 Non-Veg Only</button>
+      </div>
+      <span style="width:1px;background:var(--color-border);align-self:stretch;margin:0 8px;"></span>
+      <span style="font-size:0.8rem;font-weight:600;color:var(--color-text-muted);align-self:center;">Category:</span>
+      <button class="filter-chip active" data-filter-type="category" data-filter-value="all">All</button>
+      <button class="filter-chip" data-filter-type="category" data-filter-value="Starters">🧆 Starters</button>
+      <button class="filter-chip" data-filter-type="category" data-filter-value="Main Course">🍛 Main</button>
+      <button class="filter-chip" data-filter-type="category" data-filter-value="Rice & Breads">🍚 Rice</button>
+      <button class="filter-chip" data-filter-type="category" data-filter-value="Noodles">🍜 Noodles</button>
+      <button class="filter-chip" data-filter-type="category" data-filter-value="Snacks">🍔 Snacks</button>
+      <button class="filter-chip" data-filter-type="category" data-filter-value="Pizza">🍕 Pizza</button>
+      <button class="filter-chip" data-filter-type="category" data-filter-value="Seafood">🍤 Seafood</button>
+      <button class="filter-chip" data-filter-type="category" data-filter-value="Desserts">🍯 Desserts</button>
+      <button class="filter-chip" data-filter-type="category" data-filter-value="Beverages">🥭 Bev</button>
+    </div>
+  </div>
+
+  <!-- Menu Layout -->
+  <div class="menu-layout">
+
+    <!-- Category Sidebar -->
+    <div class="category-nav fade-up">
+      <div class="category-nav-header">Categories</div>
+      <div class="category-link active" onclick="scrollToSection('sec-all')">🍽️ All Items <span class="category-count" id="cat-count-all">71</span></div>
+      <div class="category-link" onclick="scrollToSection('sec-starters')">🧆 Starters <span class="category-count">17</span></div>
+      <div class="category-link" onclick="scrollToSection('sec-mains')">🍛 Main Course <span class="category-count">12</span></div>
+      <div class="category-link" onclick="scrollToSection('sec-rice')">🍚 Rice & Breads <span class="category-count">7</span></div>
+      <div class="category-link" onclick="scrollToSection('sec-noodles')">🍜 Noodles <span class="category-count">7</span></div>
+      <div class="category-link" onclick="scrollToSection('sec-snacks')">🍔 Snacks <span class="category-count">5</span></div>
+      <div class="category-link" onclick="scrollToSection('sec-pizza')">🍕 Pizza <span class="category-count">9</span></div>
+      <div class="category-link" onclick="scrollToSection('sec-seafood')">🍤 Seafood <span class="category-count">4</span></div>
+      <div class="category-link" onclick="scrollToSection('sec-desserts')">🍯 Desserts <span class="category-count">5</span></div>
+      <div class="category-link" onclick="scrollToSection('sec-beverages')">🥭 Beverages <span class="category-count">5</span></div>
+    </div>
+
+    <!-- Items Grid -->
+    <div>
+      <div class="menu-grid" id="menuGrid">
+
+        <!-- 🍢 STARTERS -->
+        <div id="sec-starters" class="menu-section-title">🍢 Starters</div>
+        <div class="menu-item" data-category="Starters" data-type="non-veg">
+          <div class="item-header">Chicken 65</div>
+          <div class="item-price">₹242 <span class="original-price">₹279</span></div>
+        </div>
+        <div class="menu-item" data-category="Starters" data-type="non-veg">
+          <div class="item-header">Chicken Dry Fry</div>
+          <div class="item-price">₹218 <span class="original-price">₹251</span></div>
+        </div>
+        <div class="menu-item" data-category="Starters" data-type="non-veg">
+          <div class="item-header">Chicken Finger</div>
+          <div class="item-price">₹218 <span class="original-price">₹251</span></div>
+        </div>
+        <div class="menu-item" data-category="Starters" data-type="non-veg">
+          <div class="item-header">Chicken Manchurian</div>
+          <div class="item-price">₹218 <span class="original-price">₹251</span></div>
+        </div>
+        <div class="menu-item" data-category="Starters" data-type="non-veg">
+          <div class="item-header">Chicken Pakoda (H)</div>
+          <div class="item-price">₹85 <span class="original-price">₹98</span></div>
+        </div>
+        <div class="menu-item" data-category="Starters" data-type="non-veg">
+          <div class="item-header">Chicken Pakoda (F)</div>
+          <div class="item-price">₹163 <span class="original-price">₹187</span></div>
+        </div>
+        <div class="menu-item" data-category="Starters" data-type="non-veg">
+          <div class="item-header">Chicken Momo</div>
+          <div class="item-price">₹110 <span class="original-price">₹127</span></div>
+        </div>
+        <div class="menu-item" data-category="Starters" data-type="non-veg">
+          <div class="item-header">Chicken Spring Roll</div>
+          <div class="item-price">₹145 <span class="original-price">₹167</span></div>
+        </div>
+        <div class="menu-item" data-category="Starters" data-type="veg">
+          <div class="item-header">Paneer Spring Roll</div>
+          <div class="item-price">₹157 <span class="original-price">₹180</span></div>
+        </div>
+        <div class="menu-item" data-category="Starters" data-type="veg">
+          <div class="item-header">Paneer Schezwan</div>
+          <div class="item-price">₹145 <span class="original-price">₹167</span></div>
+        </div>
+        <div class="menu-item" data-category="Starters" data-type="non-veg">
+          <div class="item-header">Fish Finger</div>
+          <div class="item-price">₹194 <span class="original-price">₹222</span></div>
+        </div>
+        <div class="menu-item" data-category="Starters" data-type="veg">
+          <div class="item-header">Onion Pakoda</div>
+          <div class="item-price">₹109 <span class="original-price">₹125</span></div>
+        </div>
+        <div class="menu-item" data-category="Starters" data-type="veg">
+          <div class="item-header">Honey Potato</div>
+          <div class="item-price">₹169 <span class="original-price">₹195</span></div>
+        </div>
+        <div class="menu-item" data-category="Starters" data-type="veg">
+          <div class="item-header">Mushroom Chilli Fry</div>
+          <div class="item-price">₹182 <span class="original-price">₹209</span></div>
+        </div>
+        <div class="menu-item" data-category="Starters" data-type="veg">
+          <div class="item-header">Chilli Paneer Dry Fry</div>
+          <div class="item-price">₹187 <span class="original-price">₹216</span></div>
+        </div>
+        <div class="menu-item" data-category="Starters" data-type="veg">
+          <div class="item-header">Veg Manchurian</div>
+          <div class="item-price">₹145 <span class="original-price">₹167</span></div>
+        </div>
+        <div class="menu-item" data-category="Starters" data-type="veg">
+          <div class="item-header">Veg Pakoda</div>
+          <div class="item-price">₹121 <span class="original-price">₹139</span></div>
+        </div>
+
+        <!-- 🍛 MAIN COURSE -->
+        <div id="sec-mains" class="menu-section-title">🍛 Main Course</div>
+        <div class="menu-item" data-category="Main Course" data-type="non-veg">
+          <div class="item-header">Chicken Masala</div>
+          <div class="item-price">₹230 <span class="original-price">₹264</span></div>
+        </div>
+        <div class="menu-item" data-category="Main Course" data-type="non-veg">
+          <div class="item-header">Chicken Tadka</div>
+          <div class="item-price">₹182 <span class="original-price">₹209</span></div>
+        </div>
+        <div class="menu-item" data-category="Main Course" data-type="veg">
+          <div class="item-header">Butter Tadka</div>
+          <div class="item-price">₹109 <span class="original-price">₹125</span></div>
+        </div>
+        <div class="menu-item" data-category="Main Course" data-type="non-veg">
+          <div class="item-header">Mix Tadka</div>
+          <div class="item-price">₹242 <span class="original-price">₹278</span></div>
+        </div>
+        <div class="menu-item" data-category="Main Course" data-type="veg">
+          <div class="item-header">Plain Tadka</div>
+          <div class="item-price">₹97 <span class="original-price">₹111</span></div>
+        </div>
+        <div class="menu-item" data-category="Main Course" data-type="non-veg">
+          <div class="item-header">Egg Tadka</div>
+          <div class="item-price">₹121 <span class="original-price">₹139</span></div>
+        </div>
+        <div class="menu-item" data-category="Main Course" data-type="non-veg">
+          <div class="item-header">Garlic Chicken Dry Fry</div>
+          <div class="item-price">₹218 <span class="original-price">₹251</span></div>
+        </div>
+        <div class="menu-item" data-category="Main Course" data-type="non-veg">
+          <div class="item-header">Honey Chicken</div>
+          <div class="item-price">₹218 <span class="original-price">₹251</span></div>
+        </div>
+        <div class="menu-item" data-category="Main Course" data-type="non-veg">
+          <div class="item-header">Pepper Chicken</div>
+          <div class="item-price">₹266 <span class="original-price">₹306</span></div>
+        </div>
+        <div class="menu-item" data-category="Main Course" data-type="non-veg">
+          <div class="item-header">Crispy Chicken</div>
+          <div class="item-price">₹182 <span class="original-price">₹209</span></div>
+        </div>
+        <div class="menu-item" data-category="Main Course" data-type="non-veg">
+          <div class="item-header">Crispy Chicken Baby</div>
+          <div class="item-price">₹242 <span class="original-price">₹278</span></div>
+        </div>
+        <div class="menu-item" data-category="Main Course" data-type="non-veg">
+          <div class="item-header">Soleted Chicken</div>
+          <div class="item-price">₹218 <span class="original-price">₹251</span></div>
+        </div>
+
+        <!-- 🍚 RICE & BREADS -->
+        <div id="sec-rice" class="menu-section-title">🍚 Rice & Breads</div>
+        <div class="menu-item" data-category="Rice & Breads" data-type="non-veg">
+          <div class="item-header">Chicken Biryani (F)</div>
+          <div class="item-price">₹330 <span class="original-price">₹380</span></div>
+        </div>
+        <div class="menu-item" data-category="Rice & Breads" data-type="non-veg">
+          <div class="item-header">Chicken Biryani (H)</div>
+          <div class="item-price">₹204 <span class="original-price">₹234</span></div>
+        </div>
+        <div class="menu-item" data-category="Rice & Breads" data-type="non-veg">
+          <div class="item-header">Chicken Dum Biryani</div>
+          <div class="item-price">₹330 <span class="original-price">₹380</span></div>
+        </div>
+        <div class="menu-item" data-category="Rice & Breads" data-type="non-veg">
+          <div class="item-header">Chicken Dum Biryani (Alt)</div>
+          <div class="item-price">₹165 <span class="original-price">₹189</span></div>
+        </div>
+        <div class="menu-item" data-category="Rice & Breads" data-type="veg">
+          <div class="item-header">Paneer Biryani</div>
+          <div class="item-price">₹209 <span class="original-price">₹240</span></div>
+        </div>
+        <div class="menu-item" data-category="Rice & Breads" data-type="veg">
+          <div class="item-header">Veg Sizzler</div>
+          <div class="item-price">₹266 <span class="original-price">₹306</span></div>
+        </div>
+        <div class="menu-item" data-category="Rice & Breads" data-type="non-veg">
+          <div class="item-header">Chicken Sizzler</div>
+          <div class="item-price">₹327 <span class="original-price">₹376</span></div>
+        </div>
+
+        <!-- 🍜 NOODLES / CHOPSUEY -->
+        <div class="menu-section-title">🍜 Noodles / Chopsuey</div>
+        <div class="menu-item" data-category="Noodles" data-type="non-veg">
+          <div class="item-header">American Chopsuey</div>
+          <div class="item-price">₹194 <span class="original-price">₹222</span></div>
+        </div>
+        <div class="menu-item" data-category="Noodles" data-type="veg">
+          <div class="item-header">American Corn</div>
+          <div class="item-price">₹182 <span class="original-price">₹209</span></div>
+        </div>
+        <div class="menu-item" data-category="Noodles" data-type="veg">
+          <div class="item-header">Italian Chopsuey</div>
+          <div class="item-price">₹194 <span class="original-price">₹222</span></div>
+        </div>
+        <div class="menu-item" data-category="Noodles" data-type="non-veg">
+          <div class="item-header">Chicken Chowmein</div>
+          <div class="item-price">₹121 <span class="original-price">₹139</span></div>
+        </div>
+        <div class="menu-item" data-category="Noodles" data-type="non-veg">
+          <div class="item-header">Egg Chowmein</div>
+          <div class="item-price">₹97 <span class="original-price">₹111</span></div>
+        </div>
+        <div class="menu-item" data-category="Noodles" data-type="veg">
+          <div class="item-header">Veg Chowmein</div>
+          <div class="item-price">₹85 <span class="original-price">₹98</span></div>
+        </div>
+        <div class="menu-item" data-category="Noodles" data-type="non-veg">
+          <div class="item-header">Mix Chowmein</div>
+          <div class="item-price">₹182 <span class="original-price">₹209</span></div>
+        </div>
+
+        <!-- 🍔 SNACKS / ROLLS -->
+        <div class="menu-section-title">🍔 Snacks / Rolls</div>
+        <div class="menu-item" data-category="Snacks" data-type="non-veg">
+          <div class="item-header">Chicken Burger</div>
+          <div class="item-price">₹165 <span class="original-price">₹189</span></div>
+        </div>
+        <div class="menu-item" data-category="Snacks" data-type="non-veg">
+          <div class="item-header">Egg Burger</div>
+          <div class="item-price">₹109 <span class="original-price">₹125</span></div>
+        </div>
+        <div class="menu-item" data-category="Snacks" data-type="non-veg">
+          <div class="item-header">Chicken Roll</div>
+          <div class="item-price">₹97 <span class="original-price">₹111</span></div>
+        </div>
+        <div class="menu-item" data-category="Snacks" data-type="veg">
+          <div class="item-header">Egg Roll</div>
+          <div class="item-price">₹73 <span class="original-price">₹84</span></div>
+        </div>
+        <div class="menu-item" data-category="Snacks" data-type="non-veg">
+          <div class="item-header">Chicken With Egg Roll</div>
+          <div class="item-price">₹109 <span class="original-price">₹125</span></div>
+        </div>
+
+        <!-- 🍕 PIZZA -->
+        <div class="menu-section-title">🍕 Pizza</div>
+        <div class="menu-item" data-category="Pizza" data-type="non-veg">
+          <div class="item-header">Blockbuster Pizza</div>
+          <div class="item-price">₹385 <span class="original-price">₹442</span></div>
+        </div>
+        <div class="menu-item" data-category="Pizza" data-type="non-veg">
+          <div class="item-header">Chicken Pizza</div>
+          <div class="item-price">₹335 <span class="original-price">₹442</span></div>
+        </div>
+        <div class="menu-item" data-category="Pizza" data-type="non-veg">
+          <div class="item-header">Chicken Pizza (Alt)</div>
+          <div class="item-price">₹418 <span class="original-price">₹481</span></div>
+        </div>
+        <div class="menu-item" data-category="Pizza" data-type="veg">
+          <div class="item-header">Corn Paneer Pizza (8")</div>
+          <div class="item-price">₹347 <span class="original-price">₹398</span></div>
+        </div>
+        <div class="menu-item" data-category="Pizza" data-type="veg">
+          <div class="item-header">Corn Veggies Pizza (8")</div>
+          <div class="item-price">₹275 <span class="original-price">₹317</span></div>
+        </div>
+        <div class="menu-item" data-category="Pizza" data-type="veg">
+          <div class="item-header">Onion Pizza (6")</div>
+          <div class="item-price">₹132 <span class="original-price">₹152</span></div>
+        </div>
+        <div class="menu-item" data-category="Pizza" data-type="veg">
+          <div class="item-header">Margherita Pizza (8")</div>
+          <div class="item-price">₹248 <span class="original-price">₹285</span></div>
+        </div>
+        <div class="menu-item" data-category="Pizza" data-type="veg">
+          <div class="item-header">Paneer Veggies Pizza</div>
+          <div class="item-price">₹317 <span class="original-price">₹364</span></div>
+        </div>
+        <div class="menu-item" data-category="Pizza" data-type="non-veg">
+          <div class="item-header">Loaded All In One Pizza</div>
+          <div class="item-price">₹440 <span class="original-price">₹506</span></div>
+        </div>
+
+        <!-- 🍤 SEAFOOD -->
+        <div class="menu-section-title">🍤 Seafood</div>
+        <div class="menu-item" data-category="Seafood" data-type="non-veg">
+          <div class="item-header">Prawns Golden Fry</div>
+          <div class="item-price">₹278 <span class="original-price">₹320</span></div>
+        </div>
+        <div class="menu-item" data-category="Seafood" data-type="non-veg">
+          <div class="item-header">Fish Curry</div>
+          <div class="item-price">₹320 <span class="original-price">₹380</span></div>
+        </div>
+        <div class="menu-item" data-category="Seafood" data-type="non-veg">
+          <div class="item-header">Tandoori Fish</div>
+          <div class="item-price">₹340 <span class="original-price">₹400</span></div>
+        </div>
+        <div class="menu-item" data-category="Seafood" data-type="non-veg">
+          <div class="item-header">Butter Garlic Prawns</div>
+          <div class="item-price">₹295 <span class="original-price">₹350</span></div>
+        </div>
+
+        <!-- 🥬 VEG SPECIALS -->
+        <div class="menu-section-title">🥬 Veg Specials</div>
+        <div class="menu-item" data-category="Veg Specials" data-type="veg">
+          <div class="item-header">Veg Chowmein</div>
+          <div class="item-price">₹85 <span class="original-price">₹98</span></div>
+        </div>
+        <div class="menu-item" data-category="Veg Specials" data-type="veg">
+          <div class="item-header">Veg Manchurian</div>
+          <div class="item-price">₹145 <span class="original-price">₹167</span></div>
+        </div>
+        <div class="menu-item" data-category="Veg Specials" data-type="veg">
+          <div class="item-header">Veg Pakoda</div>
+          <div class="item-price">₹121 <span class="original-price">₹139</span></div>
+        </div>
+        <div class="menu-item" data-category="Veg Specials" data-type="veg">
+          <div class="item-header">Veg Sizzler</div>
+          <div class="item-price">₹266 <span class="original-price">₹306</span></div>
+        </div>
+
+        <!-- 🍯 DESSERTS -->
+        <div id="sec-desserts" class="menu-section-title">🍯 Desserts</div>
+        <div class="menu-item" data-category="Desserts" data-type="veg">
+          <div class="item-header">Gulab Jamun</div>
+          <div class="item-price">₹80 <span class="original-price">₹95</span></div>
+        </div>
+        <div class="menu-item" data-category="Desserts" data-type="veg">
+          <div class="item-header">Kulfi Falooda</div>
+          <div class="item-price">₹120 <span class="original-price">₹140</span></div>
+        </div>
+        <div class="menu-item" data-category="Desserts" data-type="veg">
+          <div class="item-header">Rasgulla</div>
+          <div class="item-price">₹90 <span class="original-price">₹110</span></div>
+        </div>
+        <div class="menu-item" data-category="Desserts" data-type="veg">
+          <div class="item-header">Kheer</div>
+          <div class="item-price">₹70 <span class="original-price">₹85</span></div>
+        </div>
+        <div class="menu-item" data-category="Desserts" data-type="veg">
+          <div class="item-header">Jalebi</div>
+          <div class="item-price">₹60 <span class="original-price">₹75</span></div>
+        </div>
+
+        <!-- 🥭 BEVERAGES -->
+        <div id="sec-beverages" class="menu-section-title">🥭 Beverages</div>
+        <div class="menu-item" data-category="Beverages" data-type="veg">
+          <div class="item-header">Mango Lassi</div>
+          <div class="item-price">₹90 <span class="original-price">₹110</span></div>
+        </div>
+        <div class="menu-item" data-category="Beverages" data-type="veg">
+          <div class="item-header">Masala Chai</div>
+          <div class="item-price">₹60 <span class="original-price">₹75</span></div>
+        </div>
+        <div class="menu-item" data-category="Beverages" data-type="veg">
+          <div class="item-header">Sweet Lassi</div>
+          <div class="item-price">₹70 <span class="original-price">₹85</span></div>
+        </div>
+        <div class="menu-item" data-category="Beverages" data-type="veg">
+          <div class="item-header">Iced Coffee</div>
+          <div class="item-price">₹80 <span class="original-price">₹95</span></div>
+        </div>
+        <div class="menu-item" data-category="Beverages" data-type="veg">
+          <div class="item-header">Fresh Lemonade</div>
+          <div class="item-price">₹50 <span class="original-price">₹65</span></div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>🛒 Your Cart</h3>
+    <button class="cart-close" id="cartCloseBtn" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItemsList"></div>
+  <div class="cart-empty" id="cartEmpty">
+    <div class="cart-empty-icon">🛒</div>
+    <h4>Cart is empty</h4>
+    <p>Add something delicious!</p>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none;">
+    <div class="cart-total-row"><span>Subtotal</span><span id="cartSubtotal">₹0</span></div>
+    <div class="cart-total-row"><span>Delivery</span><span id="cartDelivery">₹40</span></div>
+    <div class="cart-total-row"><span>GST (5%)</span><span id="cartTaxes">₹0</span></div>
+    <div class="cart-total-row grand"><span>Total</span><span id="cartGrand">₹0</span></div>
+    <button class="btn btn-primary btn-full" style="margin-top:var(--space-md);" id="checkoutBtn">Checkout →</button>
+  </div>
+</div>
+
+<!-- Checkout Modal -->
+<div class="modal-overlay" id="checkoutModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Delivery Details</h3>
+      <button class="modal-close" onclick="closeModal('checkoutModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Phone Number *</label>
+        <div class="phone-input-group">
+          <span class="phone-prefix">🇮🇳 +91</span>
+          <input type="tel" id="checkoutPhone" placeholder="98765 43210" maxlength="10">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Area / Location *</label>
+        <input type="text" class="form-control" id="checkoutLocation" placeholder="Koramangala, HSR…">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Full Address *</label>
+        <textarea class="form-control" id="checkoutAddress" rows="3" placeholder="House no., street, landmark…"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('checkoutModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="placeOrder()">Place Order 🎉</button>
+    </div>
+  </div>
+</div>
+
+<!-- Footer (minimal) -->
+<footer style="background:#1A1A1A;color:rgba(255,255,255,0.5);padding:var(--space-xl) var(--space-lg);text-align:center;font-size:0.82rem;">
+  © 2025 ZestyBite — <a href="index.html" style="color:var(--color-accent);">Home</a> · <a href="booking.html" style="color:var(--color-accent);">Reserve</a> · <a href="tracking.html" style="color:var(--color-accent);">Track</a>
+</footer>
+
+<div class="toast-container"></div>
+
+<script src="js/main.js"></script>
+<script>
+  function clearSearch() {
+    document.getElementById('menuSearch').value = '';
+    activeFilters = { search: '', type: 'all', category: 'all' };
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    document.querySelector('.filter-chip[data-filter-value="all"][data-filter-type="type"]')?.classList.add('active');
+    document.querySelector('.filter-chip[data-filter-value="all"][data-filter-type="category"]')?.classList.add('active');
+    renderMenu(MENU_DATA, 'menuGrid');
+  }
+
+  function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+</script>
+</body>
+</html>
